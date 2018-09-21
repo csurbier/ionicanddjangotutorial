@@ -1,0 +1,4 @@
+django==2.0
+psycopg2-binary==2.7.4
+pillow==5.1.0
+django-jet
