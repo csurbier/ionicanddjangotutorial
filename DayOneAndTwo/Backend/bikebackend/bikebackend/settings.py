@@ -22,10 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = ')7mv*z!6ng)&2gw*6ioshlnvduum7wjxi2chyjgs!#wj4rg-ge'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 POSTGRESQL_ADDON_URI = os.getenv("POSTGRESQL_ADDON_URI")
@@ -34,10 +32,26 @@ POSTGRESQL_ADDON_HOST = os.getenv("POSTGRESQL_ADDON_HOST")
 POSTGRESQL_ADDON_DB = os.getenv("POSTGRESQL_ADDON_DB")
 POSTGRESQL_ADDON_PASSWORD = os.getenv("POSTGRESQL_ADDON_PASSWORD")
 POSTGRESQL_ADDON_USER = os.getenv("POSTGRESQL_ADDON_USER")
-STATIC_URL_PREFIX  = os.getenv("STATIC_URL_PREFIX")
+
+DEBUG = os.getenv("DEBUG")
+if DEBUG=="false":
+    DEBUG=False
+else:
+    DEBUG=True
+    os.environ["APP_HOME"] = BASE_DIR
+
 MEDIA_ROOT=os.getenv("APP_HOME")+os.getenv("STATIC_URL_PREFIX")+'/storage/'
 MEDIA_URL = os.getenv('STATIC_URL_PREFIX')+"/storage/"
-STATIC_ROOT = os.getenv("APP_HOME")+os.getenv("STATIC_URL_PREFIX")+'/static/static/'
+
+#statics
+STATIC_URL = os.getenv('STATIC_URL_PREFIX')+'/'
+STATIC_ROOT = 'static'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
 
 JET_THEMES = [
     {
@@ -177,12 +191,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-STATIC_URL = '/static/'
 
 
 #Logging
