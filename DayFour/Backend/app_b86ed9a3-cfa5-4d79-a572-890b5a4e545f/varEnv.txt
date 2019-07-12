@@ -1,0 +1,9 @@
+export DEBUG=True
+export POSTGRESQL_ADDON_URI=postgresql://uvyay6tatfl9h4cu40rd:5OCMiLyQzH5RWBzkkrTo@bszbfyrrnqdztup-postgresql.services.clever-cloud.com:/bszbfyrrnqdztup
+export POSTGRESQL_ADDON_PORT=5432
+export POSTGRESQL_ADDON_HOST=bszbfyrrnqdztup-postgresql.services.clever-cloud.com
+export POSTGRESQL_ADDON_DB=bszbfyrrnqdztup
+export POSTGRESQL_ADDON_PASSWORD=5OCMiLyQzH5RWBzkkrTo
+export APP_HOME=/mnt/6ba42c90-5cd1-491c-a216-e062d7856a73/Programmation/ionicanddjangotutorial/DayOneAndTwo/Backend/bikebackend/
+export STATIC_URL_PREFIX=/static
+export POSTGRESQL_ADDON_USER=uvyay6tatfl9h4cu40rd
