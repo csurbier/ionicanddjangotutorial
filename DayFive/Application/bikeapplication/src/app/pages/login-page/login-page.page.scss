@@ -1,0 +1,37 @@
+ion-content {
+    .auth-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 50px;
+        right: 0;
+  
+        .auth-body {
+            min-width: 280px;
+            text-align: center;
+            margin: 50px 0;
+  
+            .logo {
+                margin-bottom: 94px;
+  
+                img {
+                    max-width: 150px;
+                }
+            }
+  
+            .buttons {
+                ion-button {
+                    --border-radius: 0;
+                    height: 32px;
+                    font-size: 16px;
+                    margin: 0;
+                    margin-top: 24px;
+  
+                }
+            }
+        }
+    }
+  }
