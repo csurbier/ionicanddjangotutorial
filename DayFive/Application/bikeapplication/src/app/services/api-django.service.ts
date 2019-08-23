@@ -22,6 +22,8 @@ export class ApiDjangoService {
   apiPrefix = "/api"
   getOauthUrl = this.virtualHostName + "/o/token/";
   getUserUrl = this.virtualHostName + this.apiPrefix + "/users/"
+  urlPwdOublie = this.virtualHostName + "/account/reset_password";
+  
   constructor(public http: HttpClient,
     public loadingController: LoadingController,
     public alertCtrl: AlertController,
@@ -197,6 +199,21 @@ export class ApiDjangoService {
         });
     });
   }
+
+
+  sendResetPasswordLink(email) {
+    let httpOptions = {
+     headers: new HttpHeaders({
+       'content-type': "application/x-www-form-urlencoded",
+       'Authorization': 'Bearer '+this.tokenSSO
+       })
+     };
+   
+    let postParams = 'email_or_username='+email;
+    let url = this.urlPwdOublie;
+    return this.http.post(url,postParams,httpOptions) 
+ }
+
 
   async showLoading() {
      

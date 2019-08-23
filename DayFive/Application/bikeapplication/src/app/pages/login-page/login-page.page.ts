@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform,AlertController } from '@ionic/angular';
 import { ApiDjangoService } from '../../services/api-django.service';
 import { Router } from '@angular/router';
 import CryptoJS from 'crypto-js';
@@ -14,8 +14,45 @@ export class LoginPagePage implements OnInit {
 
   constructor(
     public apiService: ApiDjangoService,
+    public alertController:AlertController,
     public router: Router) {
 
+  }
+
+
+  async  forgotPassword()  {
+     
+    const alert = await this.alertController.create({
+      header:"Please enter your email",
+      message:"We will send you a password reset link",
+      inputs: [
+        {
+          name: 'email',
+          type: 'text'
+        }],    
+       buttons: [
+            {
+              text: 'Cancel',
+              role: 'cancel',
+              cssClass: 'secondary',
+              handler: () => {
+                console.log('Confirm Cancel');
+              }
+            }, {
+              text: 'Ok',
+              handler: (alertData) => { //takes the data 
+                console.log(alertData.email);
+                if (alertData.email){
+                  this.apiService.sendResetPasswordLink(alertData.email)
+                }
+                else{
+                  //Display error message
+                }
+            }
+            }
+          ]
+  });
+  await alert.present();
   }
 
   ngOnInit() {
@@ -46,9 +83,6 @@ export class LoginPagePage implements OnInit {
     }
   }
 
-  public forgotPassword(): void {
-    this.router.navigateByUrl("/forgot-password")
-  }
 
   public subscribe() {
     this.router.navigateByUrl("/register-page")
