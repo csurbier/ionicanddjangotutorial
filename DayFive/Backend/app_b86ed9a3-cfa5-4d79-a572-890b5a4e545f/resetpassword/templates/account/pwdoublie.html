@@ -1,0 +1,30 @@
+{# test template #}
+ {% load static %}
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>BikeBackend, reset password</title>
+  <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
+      <link rel="stylesheet" href="{% static 'resetpassword/css/style.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+    <!-- code for displaying success or error message in template -->
+
+     <form class="form-signin" action="" method="post">
+         {% csrf_token %}
+
+      <h2 class="form-signin-heading">Choose a new password</h2>
+      <input type="password" class="form-control" name="new_password1" placeholder="New password" required="" autofocus="" />
+      <input type="password" class="form-control" name="confirmation" placeholder="Confirm new password" required=""/>
+     {% if messages %}
+        {% for message in messages %}
+             {{ message }}
+        {% endfor %}
+     {% endif %}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Valid</button>
+    </form>
+    </div>
+</body>
+</html>

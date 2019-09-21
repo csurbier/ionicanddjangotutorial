@@ -24,7 +24,8 @@ SECRET_KEY = ')7mv*z!6ng)&2gw*6ioshlnvduum7wjxi2chyjgs!#wj4rg-ge'
 
 
 ALLOWED_HOSTS = ['*']
-
+DEFAULT_FROM_EMAIL=""
+SENDGRID_API_KEY=""
 
 POSTGRESQL_ADDON_URI = os.getenv("POSTGRESQL_ADDON_URI")
 POSTGRESQL_ADDON_PORT = os.getenv("POSTGRESQL_ADDON_PORT")

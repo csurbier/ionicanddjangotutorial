@@ -7,3 +7,4 @@ django-filter
 git+https://github.com/mago960806/django-rest-framework-docs.git
 django-oauth-toolkit
 django-cors-middleware
+sendgrid
