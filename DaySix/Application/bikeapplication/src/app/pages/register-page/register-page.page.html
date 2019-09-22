@@ -1,0 +1,37 @@
+<ion-content>
+  <div class="login-container">
+    <b>Bike Application</b>
+       <ion-list lines="full" mode="ios" floating-form>
+       
+        <br>
+        <form (ngSubmit)="register()" #registerForm="ngForm">
+         
+ 
+           <ion-item>
+             <ion-label  position="floating">Username</ion-label>
+             <ion-input type="text"   name="username"  [(ngModel)]="registerCredentials.username" required></ion-input>
+           </ion-item>
+           <ion-item>
+             <ion-label  position="floating">E-mail</ion-label>
+             <ion-input type="email" name="email"  [(ngModel)]="registerCredentials.email" required></ion-input>
+           </ion-item>
+ 
+           <ion-item>
+             <ion-label  position="floating">Password</ion-label>
+             <ion-input type="password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+           </ion-item>
+           <ion-item>
+             <ion-label  position="floating">Confirm password</ion-label>
+             <ion-input type="password" name="passwordbis" [(ngModel)]="registerCredentials.passwordbis" required></ion-input>
+           </ion-item>
+        <div class="button-continer">
+         <ion-button mode="ios" size="small" fill="outline" color="dark" expand="block"  type="submit">Register</ion-button>
+         </div>
+       </form>
+       <div class="button-continer">
+       <ion-button mode="ios" size="small" fill="outline" color="dark" expand="block" (click)="back()">Back</ion-button>
+       </div>
+       </ion-list>
+ </div>
+ </ion-content>
+  

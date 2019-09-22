@@ -1,0 +1,9 @@
+export DEBUG=True
+export POSTGRESQL_ADDON_URI=postgresql://uvyay6tatfl9h4cu40rd:5OCMiLyQzH5RWBzkkrTo@bqieuf8zr1jh4jc57jek-postgresql.services.clever-cloud.com:5432/bqieuf8zr1jh4jc57jek
+export POSTGRESQL_ADDON_PORT=5432
+export POSTGRESQL_ADDON_HOST=bqieuf8zr1jh4jc57jek-postgresql.services.clever-cloud.com
+export POSTGRESQL_ADDON_DB=bqieuf8zr1jh4jc57jek
+export POSTGRESQL_ADDON_PASSWORD=5OCMiLyQzH5RWBzkkrTo
+export APP_HOME=/Users/christophesurbier/Documents/Programmation/ionicdjangocode/ionicanddjangotutorial/DaySix/Backend/app_b86ed9a3-cfa5-4d79-a572-890b5a4e545f/
+export STATIC_URL_PREFIX=/static
+export POSTGRESQL_ADDON_USER=uvyay6tatfl9h4cu40rd
