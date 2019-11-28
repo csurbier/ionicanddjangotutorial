@@ -1,0 +1,12 @@
+django>=2.0.11
+psycopg2==2.8.3 --no-binary psycopg2
+pillow
+django-jet
+djangorestframework
+django-filter
+git+https://github.com/mago960806/django-rest-framework-docs.git
+django-oauth-toolkit
+django-cors-middleware
+sendgrid
+stripe
+django-map-widgets==0.2.0

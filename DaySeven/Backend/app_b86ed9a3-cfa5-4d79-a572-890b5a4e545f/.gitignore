@@ -1,0 +1,9 @@
+\.idea/
+
+api/__pycache__/
+
+backoffice/__pycache__/
+
+bikebackend/__pycache__/
+
+static/storage/
