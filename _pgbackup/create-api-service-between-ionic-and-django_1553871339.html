@@ -1,0 +1,243 @@
+<!DOCTYPE HTML> 
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+--> 
+<html> 
+    <head> 
+        <title>Create an API service between Ionic 4 and Django</title>
+        <meta name="description" content="Learn to create an API service in IONIC 4 to dialog with a django backend using Django Rest framework  - Ionic and Django Tutorial"/>
+        <meta name="author" content="surbier christophe">
+        <meta charset="utf-8"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/> 
+        <link rel="stylesheet" href="assets/css/main.css"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125461829-1"></script>
+        <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-125461829-1');
+</script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>.mySlides {
+    display: none;
+}</style>
+        <style>.responsiveimage {
+    width: 100%;
+    height: auto;
+}</style>
+    </head>     
+    <body class="is-preload"> 
+        <!-- Wrapper -->         
+        <div id="wrapper"> 
+            <!-- Main -->             
+            <div id="main"> 
+                <div class="inner"> 
+                    <!-- Header -->                     
+                    <header id="header"> 
+                        <a href="/" class="logo"><strong>Ionic and Django Tutorial</strong></a>
+                        <ul class="icons">
+                            <li>Share on 
+                                <!-- AddToAny BEGIN -->
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_twitter"></a>
+                                    <a class="a2a_button_linkedin"></a>
+                                </div>
+                                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                                <!-- AddToAny END -->                                 
+                            </li>
+                        </ul>                         
+                    </header>                     
+                    <section> 
+                        <header class="major"> 
+                            <h1>Create an API service in Ionic 4 and send requests to a Django backend</h1>
+                            <b>March 2019</b>
+                        </header>                         
+                        <span class="image main"></span> 
+                        <div>
+                            <!-- Introduction -->
+                            <p>
+                               A service in Ionic 4 (previously called provider) is a singleton class, meaning that only one instance of your code will run in memory and wil be shared by every other classes. It's a perfect candidate to group all of our http queries with our <b><a href="design-and-setup.html" target="_blank">bikebackend</a></b> Django project. </p>
+                            <!-- PUB -->
+                            <p> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- IonicDjangoBloc2 --><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="3940223516" data-ad-format="auto" data-full-width-responsive="true"></ins><script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script> </p>
+                            <!-- Suite -->
+                            <p>
+                                To create a service, just type in your terminal <pre><code>ionic g service apiDjango</code></pre> </p>
+                            <p>
+                                it will generate 2 files <b>api-django.service.ts</b> and <b>api-django.service.spec.ts</b>. As we did before, for better code organisation, move these files in the <b>app/src/services</b> folder.<br>
+                                Now we will modify the file <b>app.module.ts</b> inside the app folder to declare this new service </p>
+                            <pre><code>import {ApiDjangoService} from './services/api-django.service'</code></pre>
+                            <p>
+                        and add our <b>ApiDjangoService</b> in the <b>@NgModule</b></p>
+                            <pre><code>@NgModule({
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ApiDjangoService
+  ],
+  bootstrap: [AppComponent]
+})</code></pre>
+                            <p>
+                    Ok now that our <b>ApiDjangoService</b> is declared in the <b>app.module.ts</b> file, it will be initialised at launch time and will be accessible everywhere in our code. </p>
+                            <p>
+                            Now to make http requests to our django backend, we need to add the <b>HttpClientModule</b> to our app. Modify the <b>app.module.ts</b> to import this module: <pre><code>import { HttpClientModule } from '@angular/common/http';
+@NgModule({
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [BrowserModule,
+     IonicModule.forRoot(), 
+     HttpClientModule,
+     AppRoutingModule],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ApiDjangoService
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}</code></pre>  </p>
+                            <p>
+                        And we add the <b>HttpClientModule</b> in the import section: <pre><code>imports: [BrowserModule,
+     IonicModule.forRoot(), 
+     HttpClientModule,
+     AppRoutingModule],</code></pre> </p>
+                            <p>
+                    Now that the module is available in our Ionic application, we are going to use it in our <b>ApiDjangoService</b>, so we edit our <b>api-django.service.ts</b> file and import the module: <pre><code>import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiDjangoService {
+ constructor(private http:HttpClient) { }
+}</code></pre> </p>
+                            <p>
+                We also inject the <b>HttpClient</b> inside our class constructor: <pre><code>constructor(private http:HttpClient) { }</code></pre> </p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- Sidebar -->             
+            <div id="sidebar"> 
+                <div class="inner"> 
+                    <!-- Menu -->                     
+                    <nav id="menu"> 
+                        <header class="major"> 
+                            <h2>Menu</h2> 
+                        </header>                         
+                        <ul> 
+                            <li>
+                                <a href="/">Homepage</a>
+                            </li>                             
+                            <li>
+                                <a href="terms.html">Terms and conditions</a>
+                            </li>
+                            <li>
+                                <a href="policy.html">Privacy Policy</a>
+                            </li>                             
+                        </ul>                         
+                    </nav>                     
+                    <!-- Section -->                     
+                    <section> 
+                        <header class="major"> 
+                            <h2>Get in touch</h2> 
+                        </header>                         
+                        <p>For any questions, remarks or any development requirement.</p> 
+                        <ul class="contact"> 
+                            <li class="fa-envelope-o">
+                                <a href="mailto:csurbier@idevotion.fr">csurbier@idevotion.fr</a>
+                            </li>                             
+                            <li class="fa-home">Carrer Riera blanca, 45-47
+                                <br/> 
+                                08028 Barcelona
+                            </li>                             
+                        </ul>                         
+                    </section>                     
+                    <!-- Footer -->                     
+                    <footer id="footer"> 
+                        <p class="copyright">&copy; Surbier Christophe. All rights reserved. Development: <a href="https://www.idevotion.fr">iDevotion</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> 
+                    </footer>                     
+                </div>                 
+            </div>             
+        </div>         
+        <!-- Scripts -->         
+        <script src="assets/js/jquery.min.js"></script>         
+        <script src="assets/js/browser.min.js"></script>         
+        <script src="assets/js/breakpoints.min.js"></script>         
+        <script src="assets/js/util.js"></script>         
+        <script src="assets/js/main.js"></script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="8488918554" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <div id="disqus_thread"></div>
+        <script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
+     *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
+     *  PLATFORM OR CMS.
+     *  
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+     *  https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    var disqus_config = function () {
+        // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = "https://www.ionicanddjangotutorial.com/design-and-setup.html";  
+        
+        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "dayone-designsetup"; 
+    };
+    
+    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document, s = d.createElement('script');
+        
+        // IMPORTANT: Replace EXAMPLE with your forum shortname!
+        s.src = 'https://https-www-ionicanddjangotutorial-com.disqus.com/embed.js'
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+        <noscript>
+            Please enable JavaScript to view the 
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+        comments powered by Disqus. </a>
+        </noscript>         
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://www.ionicanddjangotutorial.com",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "email": "csurbier@idevotion.fr",
+        "contactType": "customer support"
+      }]
+    }
+  </script>
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Course",
+      "name": "Ionic and Django tutorial",
+      "description": "A tutorial to learn mobile application development from scratch and on a concrete use case, using Ionic 4 as frontend and Django as backend.",
+      "provider": {
+        "@type": "Organization",
+        "name": "iDevotion",
+        "sameAs": "https://www.ionicanddjangotutorial.com"
+      }
+    }
+  </script>
+    </body>     
+</html>

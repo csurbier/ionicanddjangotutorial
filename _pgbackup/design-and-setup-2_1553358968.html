@@ -1,0 +1,182 @@
+<!DOCTYPE HTML> 
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+--> 
+<html> 
+    <head> 
+        <title>Design and setup Django project for a Ionic mobile application - Part 2 - Ionic and Django Tutorial</title>
+        <meta name="description" content="We will learn how to design our database model and setup our django project/environment which will be used by our Ionic application."/>
+        <meta name="author" content="surbier christophe">
+        <meta charset="utf-8"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/> 
+        <link rel="stylesheet" href="assets/css/main.css"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125461829-1"></script>
+        <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125461829-1');
+</script>         
+    </head>     
+    <body class="is-preload"> 
+        <!-- Wrapper -->         
+        <div id="wrapper"> 
+            <!-- Main -->             
+            <div id="main"> 
+                <div class="inner"> 
+                    <!-- Header -->                     
+                    <header id="header"> 
+                        <a href="index.html" class="logo"><strong>Ionic and Django Tutorial</strong></a>
+                        <ul class="icons">
+                            <li>Share on 
+                                <!-- AddToAny BEGIN -->
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_twitter"></a>
+                                    <a class="a2a_button_linkedin"></a>
+                                </div>
+                                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                                <!-- AddToAny END -->                                 
+                            </li>
+                        </ul>                         
+                    </header>                     
+                    <!-- Content -->                     
+                    <section> 
+                        <header class="main"> 
+                            <h1>Design and setup Django project for a Ionic application, part 2/3</h1>
+                            <b>DAY 1 - September 2018</b>
+                        </header>                         
+                        <span class="image main"></span> 
+                        <hr class="major"/> 
+                        <h2 id="create">Creating Django project for our ionic application</h2>
+                        <p>
+				Now that our environment is ready, we can create our Django project: </p>
+                        <pre> <code>django-admin startproject bikebackend
+cd bikebackend</code> </pre>
+                        <p>Before using Django, we will need to install it so we will use pip to do it. 
+	Inside our <b>bikebackend</b> directory, create a <b>requirements.txt</b> file with the following content:<br> </p> 
+                        <div class="box"> 
+                            <p>
+	django==2.0</p> 
+                        </div>
+                        <p> <br>Then you can launch the command: <pre><code>pip3 install -r requirements.txt</code></pre> </p>
+                        <p> <span class="image left"><img src="images/repo-django.png" alt="Django directory"/></span>
+	Once done you should see the following files in your directory: <br>The <b>bikebackend</b> directory which will contains the urls and setting of our Django project. <br><b>db.sqlite3</b> the database file. We will remove this file later since we will use PostgreSQL as database. <br><b>manage.py</b> the python command file for our Django project. <br><b>requirements.txt</b> the file in which we will specify the libraries used by our Django project. </p>
+                        <p>If you want to verify that your Django project is running correctly, you can launch the command:</p>
+                        <pre><code>python3 manage.py runserver</code></pre>
+                        <p>
+	And you should see something like this: <span class="image fit"><img src="images/launch-django.png" alt="Django running"/> </span></p>
+                    </section>                     
+                    <ul class="pagination"> 
+                        <li>
+                            <a href="design-and-setup.html" class="button">Prev</a>
+                        </li>                         
+                        <li>
+                            <a href="design-and-setup.html" class="page">1</a>
+                        </li>                         
+                        <li>
+                            <a href="#" class="page active">2</a>
+                        </li>                         
+                        <li>
+                            <a href="design-and-setup-3.html" class="page">3</a>
+                        </li>                         
+                        <li>
+                            <a href="design-and-setup-3.html" class="button">Next</a>
+                        </li>                         
+                    </ul>                     
+                </div>
+            </div>             
+            <!-- Sidebar -->             
+            <div id="sidebar"> 
+                <div class="inner"> 
+                    <!-- Menu -->                     
+                    <nav id="menu"> 
+                        <header class="major"> 
+                            <h2>Menu</h2> 
+                        </header>                         
+                        <ul> 
+                            <li>
+                                <a href="index.html">Homepage</a>
+                            </li>                             
+                            <li>
+                                <a href="terms.html">Terms and conditions</a>
+                            </li>
+                            <li>
+                                <a href="policy.html">Privacy Policy</a>
+                            </li>                             
+                        </ul>                         
+                    </nav>                     
+                    <!-- Section -->                     
+                    <section> 
+                        <header class="major"> 
+                            <h2>Get in touch</h2> 
+                        </header>                         
+                        <p>For any questions, remarks or any development requirement.</p> 
+                        <ul class="contact"> 
+                            <li class="fa-envelope-o">
+                                <a href="mailto:csurbier@idevotion.fr">csurbier@idevotion.fr</a>
+                            </li>                             
+                            <li class="fa-home">Carrer Riera blanca, 45-47
+                                <br/> 
+                                08028 Barcelona
+                            </li>                             
+                        </ul>                         
+                    </section>                     
+                    <!-- Footer -->                     
+                    <footer id="footer"> 
+                        <p class="copyright">&copy; Surbier Christophe. All rights reserved. Development: <a href="https://www.idevotion.fr">iDevotion</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> 
+                    </footer>                     
+                </div>                 
+            </div>             
+        </div>         
+        <!-- Scripts -->         
+        <script src="assets/js/jquery.min.js"></script>         
+        <script src="assets/js/browser.min.js"></script>         
+        <script src="assets/js/breakpoints.min.js"></script>         
+        <script src="assets/js/util.js"></script>         
+        <script src="assets/js/main.js"></script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="8488918554" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <div id="disqus_thread"></div>
+        <script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
+     *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
+     *  PLATFORM OR CMS.
+     *  
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+     *  https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    var disqus_config = function () {
+        // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = "https://www.ionicanddjangotutorial.com/design-and-setup.html";  
+        
+        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "dayone-designsetup"; 
+    };
+    
+    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document, s = d.createElement('script');
+        
+        // IMPORTANT: Replace EXAMPLE with your forum shortname!
+        s.src = 'https://https-www-ionicanddjangotutorial-com.disqus.com/embed.js'
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+        <noscript>
+            Please enable JavaScript to view the 
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+        comments powered by Disqus. </a>
+        </noscript>         
+    </body>     
+</html>

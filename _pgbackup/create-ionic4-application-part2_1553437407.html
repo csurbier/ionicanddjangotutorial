@@ -1,0 +1,280 @@
+<!DOCTYPE HTML> 
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+--> 
+<html> 
+    <head> 
+        <title>Create a concrete Ionic 4 application - Part 2</title>
+        <meta name="description" content="Part two of how to create a ionic 4 application and use a django backend  - Ionic and Django Tutorial"/>
+        <meta name="author" content="surbier christophe">
+        <meta charset="utf-8"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/> 
+        <link rel="stylesheet" href="assets/css/main.css"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125461829-1"></script>
+        <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-125461829-1');
+</script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>.mySlides {
+    display: none;
+}</style>
+        <style>.responsiveimage {
+    width: 100%;
+    height: auto;
+}</style>
+    </head>     
+    <body class="is-preload"> 
+        <!-- Wrapper -->         
+        <div id="wrapper"> 
+            <!-- Main -->             
+            <div id="main"> 
+                <div class="inner"> 
+                    <!-- Header -->                     
+                    <header id="header"> 
+                        <a href="/" class="logo"><strong>Ionic and Django Tutorial</strong></a>
+                        <ul class="icons">
+                            <li>Share on 
+                                <!-- AddToAny BEGIN -->
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_twitter"></a>
+                                    <a class="a2a_button_linkedin"></a>
+                                </div>
+                                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                                <!-- AddToAny END -->                                 
+                            </li>
+                        </ul>                         
+                    </header>                     
+                    <section> 
+                        <header class="major"> 
+                            <h1>Create a Ionic 4 application - Part 2</h1>
+                            <b>DAY 3 - March 2019</b>
+                        </header>                         
+                        <span class="image main"></span> 
+                        <div>
+                            <p>
+                            Even better if you want to render your app as it will render on iOS or Android, direclty on your browser, just launch in your terminal the command:</p>
+                            <pre><code>ionic serve --lab</code></pre>
+                            <p> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- IonicDjangoBloc2 --><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="3940223516" data-ad-format="auto" data-full-width-responsive="true"></ins><script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script> </p>
+                            <p>
+                                Answer yes to the question to install required package, and now your browser will display:</p>
+                            <img src="images/ionic/ionic-lab.png" class="responsiveimage">
+                            <p><br>One screen is for iOS and other one is for Android.<br>
+                            Of course with <b>ionic serve</b> command (without --lab) you can still use Chrome or Safari developer extension to simulate the device that you want to use</p>
+                            <p>
+                           If we look at the code generated, we will see many directories and files:</p>
+                            <img src="images/ionic/ionic-tree.png">
+                            <p> </p>
+                            <div class="table-wrapper"> 
+                                <table class="alt"> 
+                                    <tbody> 
+                                        <tr> 
+                                            <td>Main Directories to know</td> 
+                                            <td colspan="2">Explanations</td> 
+                                        </tr>
+                                        <tr> 
+                                            <td>resources</td> 
+                                            <td colspan="2">Will contain our application logo and splashscreen images from which ionic will generate all files necessary to build ios and android application.</td> 
+                                        </tr>
+                                        <tr> 
+                                            <td>src</td> 
+                                            <td colspan="2">The source code</td> 
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p>
+                                    Inside the <b>src</b> directory, we will find: </p>
+                                <table class="alt"> 
+                                    <tbody> 
+                                        <tr> 
+                                            <td>Directory</td> 
+                                            <td colspan="2">Explanations</td> 
+                                        </tr>
+                                        <tr> 
+                                            <td>app</td> 
+                                            <td colspan="2">The code that we will write using 
+                                                <a href="https://ionicframework.com/docs/v3/developer-resources/typescript/" target="_blank"><b>typescript langage</b></a>
+                                            </td>                                             
+                                        </tr>
+                                        <tr> 
+                                            <td>assets</td> 
+                                            <td colspan="2">Will contain all files relative to fonts, images</td> 
+                                        </tr>
+                                        <tr> 
+                                            <td>environments</td> 
+                                            <td colspan="2"> 2 environment files one for production and one for development</td> 
+                                        </tr>
+                                        <tr> 
+                                            <td>theme</td> 
+                                            <td colspan="2">Saas file (TheIonic css for our application)</td> 
+                                        </tr>
+                                    </tbody>                                     
+                                </table>
+                                <p>
+                                    I like to have a clean separation of things while doing development. So inside of <b>app</b> directory, i will create the following directories: </p>
+                                <table class="alt"> 
+                                    <tbody> 
+                                        <tr> 
+                                            <td>Directory</td> 
+                                            <td colspan="2">Explanations</td> 
+                                        </tr>
+                                        <tr> 
+                                            <td>constants</td> 
+                                            <td colspan="2">Will contain a file with all our constants </td> 
+                                        </tr>
+                                        <tr> 
+                                            <td>models</td> 
+                                            <td colspan="2">Will contain all files relative to models</td> 
+                                        </tr>
+                                        <tr> 
+                                            <td>pages</td> 
+                                            <td colspan="2">Will contain all pages of our ionic 4 application</td> 
+                                        </tr>
+                                        <tr> 
+                                            <td>services</td> 
+                                            <td colspan="2">Will contain all services (called providers in Ionic 3) used by our ionic 4 application</td> 
+                                        </tr>
+                                    </tbody>                                     
+                                </table>
+                            </div>                             
+                        </div>
+                    </section>
+                    <ul class="pagination"> 
+                        <li>
+                            <a href="create-ionic4-application.html" class="button">Prev</a>
+                        </li>                         
+                        <li>
+                            <a href="create-ionic4-application.html" class="page">1</a>
+                        </li>                         
+                        <li>
+                            <a href="#" class="page active">2</a>
+                        </li>
+                        <li>
+                            <a href="create-ionic4-application-part3.html" class="button">Next</a>
+                        </li>                         
+                    </ul>
+                </div>
+            </div>
+            <!-- Sidebar -->             
+            <div id="sidebar"> 
+                <div class="inner"> 
+                    <!-- Menu -->                     
+                    <nav id="menu"> 
+                        <header class="major"> 
+                            <h2>Menu</h2> 
+                        </header>                         
+                        <ul> 
+                            <li>
+                                <a href="/">Homepage</a>
+                            </li>                             
+                            <li>
+                                <a href="terms.html">Terms and conditions</a>
+                            </li>
+                            <li>
+                                <a href="policy.html">Privacy Policy</a>
+                            </li>                             
+                        </ul>                         
+                    </nav>                     
+                    <!-- Section -->                     
+                    <section> 
+                        <header class="major"> 
+                            <h2>Get in touch</h2> 
+                        </header>                         
+                        <p>For any questions, remarks or any development requirement.</p> 
+                        <ul class="contact"> 
+                            <li class="fa-envelope-o">
+                                <a href="mailto:csurbier@idevotion.fr">csurbier@idevotion.fr</a>
+                            </li>                             
+                            <li class="fa-home">Carrer Riera blanca, 45-47
+                                <br/> 
+                                08028 Barcelona
+                            </li>                             
+                        </ul>                         
+                    </section>                     
+                    <!-- Footer -->                     
+                    <footer id="footer"> 
+                        <p class="copyright">&copy; Surbier Christophe. All rights reserved. Development: <a href="https://www.idevotion.fr">iDevotion</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> 
+                    </footer>                     
+                </div>                 
+            </div>             
+        </div>         
+        <!-- Scripts -->         
+        <script src="assets/js/jquery.min.js"></script>         
+        <script src="assets/js/browser.min.js"></script>         
+        <script src="assets/js/breakpoints.min.js"></script>         
+        <script src="assets/js/util.js"></script>         
+        <script src="assets/js/main.js"></script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="8488918554" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <div id="disqus_thread"></div>
+        <script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
+     *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
+     *  PLATFORM OR CMS.
+     *  
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+     *  https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    var disqus_config = function () {
+        // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = "https://www.ionicanddjangotutorial.com/design-and-setup.html";  
+        
+        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "dayone-designsetup"; 
+    };
+    
+    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document, s = d.createElement('script');
+        
+        // IMPORTANT: Replace EXAMPLE with your forum shortname!
+        s.src = 'https://https-www-ionicanddjangotutorial-com.disqus.com/embed.js'
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+        <noscript>
+            Please enable JavaScript to view the 
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+        comments powered by Disqus. </a>
+        </noscript>         
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://www.ionicanddjangotutorial.com",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "email": "csurbier@idevotion.fr",
+        "contactType": "customer support"
+      }]
+    }
+  </script>
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Course",
+      "name": "Ionic and Django tutorial",
+      "description": "A tutorial to learn mobile application development from scratch and on a concrete use case, using Ionic 4 as frontend and Django as backend.",
+      "provider": {
+        "@type": "Organization",
+        "name": "iDevotion",
+        "sameAs": "https://www.ionicanddjangotutorial.com"
+      }
+    }
+  </script>
+    </body>     
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE HTML> 
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+--> 
+<html> 
+    <head> 
+        <title>Sign in with Apple in Ionic application</title>
+        <meta name="description" content="In this tutorial, i will show you how to implement sign in with Apple with Ionic 4."/>
+        <meta name="author" content="surbier christophe">
+        <meta charset="utf-8"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/> 
+        <link rel="stylesheet" href="assets/css/main.css"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125461829-1"></script>
+        <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125461829-1');
+</script>         
+        <style>.responsiveimage {
+    width: 100%;
+    height: auto;
+}</style>
+    </head>     
+    <body class="is-preload"> 
+        <!-- Wrapper -->         
+        <div id="wrapper"> 
+            <!-- Main -->             
+            <div id="main"> 
+                <div class="inner"> 
+                    <!-- Header -->                     
+                    <header id="header"> 
+                        <a href="index.html" class="logo"><strong>Ionic and Django Tutorial</strong></a>
+                        <ul class="icons">
+                            <li>Share on 
+                                <!-- AddToAny BEGIN -->
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_twitter"></a>
+                                    <a class="a2a_button_linkedin"></a>
+                                </div>
+                                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                                <!-- AddToAny END -->                                 
+                            </li>
+                        </ul>                         
+                    </header>                     
+                    <!-- Content -->                     
+                    <section> 
+                        <header class="main"> 
+                            <h1>Implement Sign in with Apple in Ionic 4 application</h1>
+                            <b>October 2019</b>
+                        </header>                         
+                        <span class="image main"></span> 
+                        <p> 
+                        If you have implemented the Facebook login or Google login in your application, you should also offer the possibility for your users to login with Apple (which is a new feature introduced with iOS 13), or Apple will reject your application. <br>
+                        So in this tutorial, i will show you how to <strong>implement this new sign in with Apple feature</strong>, using Ionic 4 and Django for backend.  </p>
+                        <h2>
+                            Configure your Apple developer account for Apple Sign in using web method </h2>
+                        <p>
+                           As first step, we will need to add the <b>Signin feature</b> to our iOS app. To do this, you need to open your app with xcode, then click on the Signing & capabilities tab, and check the "Sign In with Apple" feature.  </p>
+                        <img src="images/signinwithapple/sign_in_with_apple_step1.png" class="responsiveimage"/>
+                        <p>
+                            Now next step is to configure our website on which will enable Apple to send the user identification once he will sign in in our app.<br>
+                            Indeed since we want to enable the <strong>"signin with apple"</strong> on our Ionic app (process will be the same on a website or a PWA), we will use the <a href="https://developer.apple.com/documentation/signinwithapplejs/incorporating_sign_in_with_apple_into_other_platforms" target="_blank">following instructions</a> from Apple, and we need to configure few things in our <a href="https://developer.apple.com/" target="_blank">developer apple account</a>. </p>
+                        <ol>
+                            <li>Create a service id for our website</li>
+                            <p>
+                                On your apple developer account, go to <b>Certificates, identifier & profiles</b> menu, and click on the plus button to add a new identifier. Then select the <b>Services IDs</b> option. </p>
+                            <img src="images/signinwithapple/sign_in_with_apple_step2.png" class="responsiveimage"/>
+                            <li id="registerserviceid">Register a service id for our website</li>
+                            <p>
+                                To register a new services id, we need to enter a description and an identifier. <b>This identifier must be different</b> than the one you choose for your ios app (usually known as bundle id). So i choose to add the word <b>web</b> in my identifier, which gives me the value: <b>com.swiitch.webapp</b>, while my ios app bundle id is : <b>com.swiitch.app</b>.<br>
+                                We also need to enable the "sign in with apple" and edit it to configure it. </p>
+                            <img src="images/signinwithapple/sign_in_with_apple_step3.png" class="responsiveimage"/>
+                            <li>Configure our website services id</li>
+                            <p>
+                              Last step is to provide the domain of your website (which will receive the user authentication) and the redirect_url (which will be called by Apple to send values). <br>
+                             The web domain will be our django backend (<b>backend.swiitchvtc.com</b> for this example) and the return URLS will be the endpoint name in our django backend that will receive the parameters sent by Apple (<b>https://backend.swiitchvtc.com/api/signin_with_apple/</b> for this example, but you can name it as you want).    </p>
+                            <img src="images/signinwithapple/sign_in_with_apple_step4.png" class="responsiveimage"/> 
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- IonicDjangoBloc2 -->
+                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="3940223516" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                            <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                            <p> <br><br>
+                                After clicking on "save" button, you can click on the register button and you are done for the configuration. </p>
+                            <img src="images/signinwithapple/sign_in_with_apple_step5.png" class="responsiveimage"/> 
+                        </ol>                         
+                        <h2>
+                            Configure our Django backend for Apple sign in </h2>
+                        <p>
+                            In previous step, we configure our website to receive the user authentification information. As i said, we don't have a real website, but just a django backend, which will receive the information to the specific endpoint we configured in previous step. <br><br>
+                            But before receiving information, our domain name must have been valided by Apple. To do so, we need to upload a verification file into it. To get this verification file, just go back to the configuration of the <a href="#registerserviceid">website</a> and click on the "download" button.  </p>
+                        <img src="images/signinwithapple/sign_in_with_apple_step6.png" class="responsiveimage"/>
+                        <p> <br><br>
+                            As mentionned, Apple will try to verify our domain by calling the url:<b>https://example.com/.well-known/apple-developer-domain-association.txt</b> which means for our domain:  <b>https://backend.swiitchvtc.com/.well-known/apple-developer-domain-association.txt</b> </p>
+                        <p>
+                            So i will configure this specific url in our Django backend. Just edit the <b>urls.py</b> file of my django project and add the following code: </p>
+                        <pre><code>from django.views.generic.base import RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
+urlpatterns = [
+    path(".well-known/apple-developer-domain-association.txt", RedirectView.as_view(url=staticfiles_storage.url("apple-developer-domain-association.txt")), ),</code> </pre>
+                        <p>
+                            I'm declaring the path <b>.well-known/apple-developer-domain-association.txt</b> as a valid url, and tell Django to use the default method <b>RedirectView.as_view</b> and giving it the name of the file i want to redirect to. This file <b>apple-developer-domain-association.txt</b> is the one downloaded from Apple, and i put it in my django project static files.  </p>
+                        <p>
+                            Now if i redeploy the django project and click the "Verify" button (on Apple website), Apple should be able to verify our domain. You can check yourself before if the url responds successfully. </p>
+                        <h3>
+                            Receive "Sign in with Apple" user information with Django </h3>
+                        <p>
+                            If you have read the <a href="https://developer.apple.com/documentation/signinwithapplejs/incorporating_sign_in_with_apple_into_other_platforms" target="_blank">apple's instruction</a>, you already know that Apple will pass us the following parameters:<br> </p>
+                        <table>
+                            <tr>
+                                <td>code</td>
+                                <td>A single-use authorization code that is valid for five minutes.</td>
+                            </tr>
+                            <tr>
+                                <td>id_token</td>
+                                <td>A JSON web token containing the user’s identity information.</td>
+                            </tr>
+                            <tr>
+                                <td>state</td>
+                                <td>The state contained in the Authorize URL</td>
+                            </tr>
+                            <tr>
+                                <td>user</td>
+                                <td>A JSON string containing the data requested in the scope property. The returned data is in the following format: { "name": { "firstName": string, "lastName": string }, "email": string }</td>
+                            </tr>
+                        </table>
+                        <p> <br>The <b>code</b> will be useless for us. <br>The <b>id_token</b> will be the unique identifier for our user (such as a facebookId or googleId) <br>The <b>state</b> will be the same value that the one we passed to Apple (we will discuss about it later in the Ionic implementation). This is based on this value that we can retrieve the content in our backend. <br>The <b>user</b> information will contains the email and firstName, lastName </p>
+                        <p>
+                            So we need to save all these values in our database, to be able to retrieve all of these information later in our Ionic application. To do so, i will create a new specific django models. </p>
+                        <pre><code>
+class AppleSignIn(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    code = models.TextField(null=True, blank=True)
+    token = models.TextField(null=True, blank=True)
+    state = models.CharField(max_length=100,null=True,blank=True)
+    jsonUser = models.TextField(null=True,blank=True)
+    createdDate = models.DateTimeField(auto_now_add=True)
+    updatedDate = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return u'%s - %s' % (self.code,self.state)</code></pre>
+                        <p>
+                            Then we can implement our endpoint url (the one we specified in the Redirect's url of Apple configuration). </p>
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- IonicDjangoBloc2 -->
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="3940223516" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                        <p>
+                            Edit the <b>api/urls.py</b> file of your api and add: </p>
+                        <pre><code>url(r'^signin_with_apple/$',
+            signinApple,name="signinApple"),</code></pre>
+                        <p>
+                            We just define our new endpoint and told django to use the <b>signinApple</b> method, so let's implement it: </p>
+                        <pre><code>@csrf_exempt
+def signinApple(request):
+    logger.info(&#x22;==== Sign in with Apple&#x22;)
+    if request.method == &#x22;POST&#x22;:
+        try:
+            code = request.POST[&#x27;code&#x27;]
+            id_token = request.POST[&#x22;id_token&#x22;]
+            state = request.POST[&#x22;state&#x22;]
+            if &#x22;user&#x22; in request.POST:
+                user = request.POST[&#x22;user&#x22;]
+                logger.info(&#x22;Code %s id_token %s state %s user %s&#x22;%(code,id_token,state,user))
+                from bo.models import AppleSignIn
+                signin = AppleSignIn()
+                signin.code=code
+                signin.token = id_token
+                signin.state = state
+                signin.jsonUser = user
+                signin.save()
+            else:
+                from bo.models import AppleSignIn
+                signin = AppleSignIn()
+                signin.code = code
+                signin.token = id_token
+                signin.state = state
+                signin.jsonUser = &#x22;&#x22;
+                signin.save()
+            html = &#x22;&#x3C;html&#x3E;&#x3C;body&#x3E;&#x3C;h1&#x3E;Merci vous pouvez retourner sur l&#x27;application Swiitch&#x3C;/h1&#x3E;&#x3C;/body&#x3E;&#x3C;/html&#x3E;&#x22;
+            return HttpResponse(html)
+            #return HttpResponse(status=200)
+        except Exception as e:
+            logger.info(e)
+            return HttpResponse(status=500)
+    return HttpResponse(status=404)</code></pre>
+                        <p>
+                            The code is quite simple. We get the parameters sent by Apple within a POST method.<br> <i><b>Please notice that when we are signin with Apple for the first time, Apple will sent the user information into the user parameter, but then on next time, the user can be empty or missing</b></i> <br><br>
+                            We save the received values in our new <b>AppleSignIn</b> models and we return an html response telling our enduser to go back to the Ionic application.  </p>
+                        <p>
+                            In didn't mentionned it yet, but when sign in with Apple in our Ionic application, we will launch an external Safari to a specific url to do the authentification. So our user will be redirected outside of our Ionic app. This is why as an html response, i display a message in Safari, to ask the user to go back to the Ionic application. </p>
+                        <p>
+                            Finally we need to add a new endpoint to our api, to be able to retrieve the received values using the <b>state</b> parameters. This time, we will use default django rest framework method, to do this: </p>
+                        <pre><code>url(r'^applesignin/$',
+            AppleSignInListView.as_view(),
+            name='applesignin'),</code></pre>
+                        <p>
+                            And we will declare this method: </p>
+                        <pre><code>
+class AppleSignInFilter(FilterSet):
+    class Meta:
+        model = AppleSignIn
+        fields = [
+            &#x27;state&#x27;,
+            ]  
+class AppleSignInListView(generics.ListAPIView):
+    &#x22;&#x22;&#x22;
+            get:
+                Permet de rechercher (ou de voir) les apple sign in existants.
+                Il est possible de rechercher via le champs:
+                :param state: state
+    &#x22;&#x22;&#x22;
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = AppleSignIn.objects.all()
+    serializer_class = AppleSignInSerializer
+    # How to filter
+    filter_class = AppleSignInFilter
+    ordering = (&#x27;-createdDate&#x27;,)</code></pre>
+                        <p>
+                             and the associated serializer: </p>
+                        <pre><code>class AppleSignInSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AppleSignIn
+        fields = '__all__'</code></pre>
+                        <p>
+                            Ok so using this endpoint <b>/applesignin</b> we will be able to search a specific value using the state parameter (since we add a filter on it). </p>
+                        <p>
+                            Now it's time to implement <b>sign in with Apple</b>into our Ionic application.  </p>
+                    </section>                     
+                    <ul class="pagination"> 
+                        <li>
+                            <a href="#" class="page active">1</a>
+                        </li>                         
+                        <li>
+                            <a href="ionic-signin-with-apple-part2.html" class="button">Next</a>
+                        </li>                         
+                    </ul>                     
+                    <section>
+                        <div id="disqus_thread"></div>
+                        <script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
+     *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
+     *  PLATFORM OR CMS.
+     *  
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+     *  https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    var disqus_config = function () {
+        // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = "https://www.ionicanddjangotutorial.com/design-and-setup.html";  
+        
+        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "dayone-designsetup"; 
+    };
+    
+    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document, s = d.createElement('script');
+        
+        // IMPORTANT: Replace EXAMPLE with your forum shortname!
+        s.src = 'https://https-www-ionicanddjangotutorial-com.disqus.com/embed.js'
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+                    </section>
+                </div>
+            </div>             
+            <!-- Sidebar -->             
+            <div id="sidebar"> 
+                <div class="inner"> 
+                    <!-- Menu -->                     
+                    <nav id="menu"> 
+                        <header class="major"> 
+                            <h2>Menu</h2> 
+                        </header>                         
+                        <ul> 
+                            <li>
+                                <a href="index.html">Homepage</a>
+                            </li>                             
+                            <li>
+                                <a href="terms.html">Terms and conditions</a>
+                            </li>
+                            <li>
+                                <a href="policy.html">Privacy Policy</a>
+                            </li>                             
+                        </ul>                         
+                    </nav>                     
+                    <!-- Section -->                     
+                    <section> 
+                        <header class="major"> 
+                            <h2>Get in touch</h2> 
+                        </header>                         
+                        <p>For any questions, remarks or any development requirement.</p> 
+                        <ul class="contact"> 
+                            <li class="fa-envelope-o">
+                                <a href="mailto:csurbier@idevotion.fr">csurbier@idevotion.fr</a>
+                            </li>                             
+                            <li class="fa-home">Carrer Riera blanca, 45-47
+                                <br/> 
+                                08028 Barcelona
+                            </li>                             
+                        </ul>                         
+                    </section>                     
+                    <!-- Footer -->                     
+                    <footer id="footer"> 
+                        <p class="copyright">&copy; Surbier Christophe. All rights reserved. Development: <a href="https://www.idevotion.fr">iDevotion</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> 
+                    </footer>                     
+                </div>                 
+            </div>             
+        </div>         
+        <!-- Scripts -->         
+        <script src="assets/js/jquery.min.js"></script>         
+        <script src="assets/js/browser.min.js"></script>         
+        <script src="assets/js/breakpoints.min.js"></script>         
+        <script src="assets/js/util.js"></script>         
+        <script src="assets/js/main.js"></script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="8488918554" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <noscript>
+            Please enable JavaScript to view the 
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+        comments powered by Disqus. </a>
+        </noscript>         
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://www.ionicanddjangotutorial.com",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "email": "csurbier@idevotion.fr",
+        "contactType": "customer support"
+      }]
+    }
+  </script>
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Course",
+      "name": "Ionic and Signin with Apple",
+      "description": "Learn to implement signin with Apple with Ionic",
+      "provider": {
+        "@type": "Organization",
+        "name": "iDevotion",
+        "sameAs": "https://www.ionicanddjangotutorial.com"
+      }
+    }
+  </script>
+    </body>     
+</html>

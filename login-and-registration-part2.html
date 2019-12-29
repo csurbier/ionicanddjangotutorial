@@ -1,0 +1,323 @@
+<!DOCTYPE HTML> 
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+--> 
+<html> 
+    <head> 
+        <title>Login and registration with Ionic 4 and Django - Part two</title>
+        <meta name="description" content="Learn how to login or registered your users in a Ionic 4 application - part two - Ionic and Django Tutorial"/>
+        <meta name="author" content="surbier christophe">
+        <meta charset="utf-8"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/> 
+        <link rel="stylesheet" href="assets/css/main.css"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125461829-1"></script>
+        <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-125461829-1');
+</script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>.mySlides {
+    display: none;
+}</style>
+        <style>.responsiveimage {
+    width: 100%;
+    height: auto;
+}</style>
+    </head>     
+    <body class="is-preload"> 
+        <!-- Wrapper -->         
+        <div id="wrapper"> 
+            <!-- Main -->             
+            <div id="main"> 
+                <div class="inner"> 
+                    <!-- Header -->                     
+                    <header id="header"> 
+                        <a href="/" class="logo"><strong>Ionic and Django Tutorial</strong></a>
+                        <ul class="icons">
+                            <li>Share on 
+                                <!-- AddToAny BEGIN -->
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_twitter"></a>
+                                    <a class="a2a_button_linkedin"></a>
+                                </div>
+                                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                                <!-- AddToAny END -->                                 
+                            </li>
+                        </ul>                         
+                    </header>                     
+                    <section> 
+                        <header class="major"> 
+                            <h1>Sign in or sign out users with Ionic 4 and Django - Part two</h1>
+                            <b>DAY 5 - August 2019</b>
+                        </header>                         
+                        <span class="image main"></span> 
+                        <div>
+                            <h2>Create a register page with Ionic 4</h2>
+                            <p>As we have done for login page, we need to add the register page to our ionic project: </p>
+                            <pre><code>ionic g page RegisterPage</code></pre>
+                            <p>
+                                Then we move it into our <b>pages</b> directory and we change the <b>app-routing.module.ts</b> file to reflect this change. </p>
+                            <pre><code> { path: 'register-page', loadChildren: './pages/register-page/register-page.module#RegisterPagePageModule' }</code></pre>
+                            <p>
+                                Next we modify the <b>register-page.page.html</b> to setup our interface with a form to ask the main parameters required to create an account: the email, the username, the password and a password confirmation </p>
+                            <pre><code>&#x3C;ion-content&#x3E;
+  &#x3C;div class=&#x22;login-container&#x22;&#x3E;
+    &#x3C;b&#x3E;Bike Application&#x3C;/b&#x3E;
+       &#x3C;ion-list lines=&#x22;full&#x22; mode=&#x22;ios&#x22; floating-form&#x3E; 
+        &#x3C;br&#x3E;
+        &#x3C;form (ngSubmit)=&#x22;register()&#x22; #registerForm=&#x22;ngForm&#x22;&#x3E;  
+           &#x3C;ion-item&#x3E;
+             &#x3C;ion-label  position=&#x22;floating&#x22;&#x3E;Username&#x3C;/ion-label&#x3E;
+             &#x3C;ion-input type=&#x22;text&#x22;   name=&#x22;username&#x22;  [(ngModel)]=&#x22;registerCredentials.username&#x22; required&#x3E;&#x3C;/ion-input&#x3E;
+           &#x3C;/ion-item&#x3E;
+           &#x3C;ion-item&#x3E;
+             &#x3C;ion-label  position=&#x22;floating&#x22;&#x3E;E-mail&#x3C;/ion-label&#x3E;
+             &#x3C;ion-input type=&#x22;email&#x22; name=&#x22;email&#x22;  [(ngModel)]=&#x22;registerCredentials.email&#x22; required&#x3E;&#x3C;/ion-input&#x3E;
+           &#x3C;/ion-item&#x3E; 
+           &#x3C;ion-item&#x3E;
+             &#x3C;ion-label  position=&#x22;floating&#x22;&#x3E;Password&#x3C;/ion-label&#x3E;
+             &#x3C;ion-input type=&#x22;password&#x22; name=&#x22;password&#x22; [(ngModel)]=&#x22;registerCredentials.password&#x22; required&#x3E;&#x3C;/ion-input&#x3E;
+           &#x3C;/ion-item&#x3E;
+           &#x3C;ion-item&#x3E;
+             &#x3C;ion-label  position=&#x22;floating&#x22;&#x3E;Confirm password&#x3C;/ion-label&#x3E;
+             &#x3C;ion-input type=&#x22;password&#x22; name=&#x22;passwordbis&#x22; [(ngModel)]=&#x22;registerCredentials.passwordbis&#x22; required&#x3E;&#x3C;/ion-input&#x3E;
+           &#x3C;/ion-item&#x3E;
+        &#x3C;div class=&#x22;button-continer&#x22;&#x3E;
+         &#x3C;ion-button mode=&#x22;ios&#x22; size=&#x22;small&#x22; fill=&#x22;outline&#x22; color=&#x22;dark&#x22; expand=&#x22;block&#x22;  type=&#x22;submit&#x22;&#x3E;Register&#x3C;/ion-button&#x3E;
+         &#x3C;/div&#x3E;
+       &#x3C;/form&#x3E;
+       &#x3C;div class=&#x22;button-continer&#x22;&#x3E;
+       &#x3C;ion-button mode=&#x22;ios&#x22; size=&#x22;small&#x22; fill=&#x22;outline&#x22; color=&#x22;dark&#x22; expand=&#x22;block&#x22; (click)=&#x22;back()&#x22;&#x3E;Back&#x3C;/ion-button&#x3E;
+       &#x3C;/div&#x3E;
+       &#x3C;/ion-list&#x3E;
+ &#x3C;/div&#x3E;
+ &#x3C;/ion-content&#x3E; </code></pre>
+                            <p>
+                                To access this page, we need to create the <b>subscribe()</b> method in our Login page, to redirect the user on the register page, like this: </p>
+                            <pre><code>
+  public subscribe() {
+    this.router.navigateByUrl("/register-page")
+  }</code></pre>
+                            <p>
+                                Because on our login page interface, we specified a button to click on to go to the register page </p>
+                            <pre><code>  &#x3C;ion-button mode=&#x22;ios&#x22; size=&#x22;small&#x22; fill=&#x22;outline&#x22; color=&#x22;dark&#x22; expand=&#x22;block&#x22; (click)=&#x22;subscribe()&#x22;&#x3E;Subscribe&#x3C;/ion-button&#x3E;</code></pre>
+                            <p>
+                                In our register form, we indicate the method <b>register()</b> which will received the parameters entered. First we need to check that values have been entered, then we need to check if the network is available. If so, we need to verify if an account already exists for the email provided. If so, we show a message to the user to indicate that he should login instead of registering since we already know this email. <br> If everything is ok, then we can create the account. </p>
+                            <pre><code>
+  register() {
+    if (this.registerCredentials.password != this.registerCredentials.passwordbis) {
+      this.apiService.showError("Sorry passwords doesn't match");
+    }
+    else if (this.registerCredentials.username.length == 0 && this.registerCredentials.email.length == 0) {
+      this.apiService.showError("Please enter your email and username");
+    }
+    else { 
+      if (this.apiService.networkConnected) {
+        this.apiService.showLoading();
+        // Check email
+        let queryPath = '?email=' + this.registerCredentials.email;
+        this.apiService.findUser(queryPath).subscribe((listUser) => {
+          this.apiService.stopLoading()
+          console.log(JSON.stringify(listUser))
+          if (listUser) {
+            let nbUserFound = listUser["count"]
+            if (nbUserFound==0){
+              let encryptedPassword = CryptoJS.SHA256(this.registerCredentials.password).toString(CryptoJS.enc.Hex);
+              let userToCreate = {
+                "email": this.registerCredentials.email,
+                "username": this.registerCredentials.username,
+                "password": encryptedPassword,
+                "valid": true,
+                "is_active": true,
+                "is_staff": false
+              } 
+              this.apiService.createUser(userToCreate).subscribe((resultat) => {
+                if (resultat) {
+                  console.log(resultat)
+                }
+                else {
+                  this.apiService.stopLoading();
+                  this.apiService.showError("An error occured while registering")
+                }
+              });
+            }
+            else{
+              this.apiService.showError("An account already exists for this email, please login");
+            } 
+          }
+          else { 
+            this.apiService.showError("An error occured while registering") 
+          }
+        });
+      }
+    }
+  }</code></pre>
+                            <p>
+                                To create the user, we will call our API with a JSON object containing the information of the user to create  (email, username and passord). I also added the valid, is_active and is_staff booleans. To create a user, using our Django API, we just need to call our user endpoint with an HTTP Post </p>
+                            <pre><code>createUser(user){ 
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + this.tokenSSO,
+        'Content-Type': 'application/json'
+      })
+    }; 
+    let url = this.getUserUrl;
+    return Observable.create(observer => {
+      // At this point make a request to your backend 
+      console.log("on appelle BACKEND encoded url " + url);
+      this.http.post(url, user, options)
+        .pipe(retry(1))
+        .subscribe(res => {
+          observer.next(res);
+          observer.complete();
+        }, error => {
+          observer.next();
+          observer.complete();
+          console.log(error);// Error getting the data
+        });
+    });
+  }</code></pre>
+                            <p>
+                                If everything goes fine, you should receive as result a JSON with the object created. </p>
+                            <p>
+                               These are the basic steps to login and to register a user within our application. From here, we should be able to authorize the user to access the main page of our application, and may be to remember him, to avoid identificating himself each time he will be using the app. We will study this, in next tutorial. </p>
+                            <p>
+                                As usual, you can find the code in my <a href="https://github.com/csurbier/ionicanddjangotutorial/tree/master/DayFive" target="_blank">Github repository</a> </p>
+                            <p>
+                                You can find how to manage the "forget password" link in this <a href="django-reset-password.html" alt="Reset password link with Django">tutorial</a> </p>
+                            <p> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- IonicDjangoBloc2 --><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="3940223516" data-ad-format="auto" data-full-width-responsive="true"></ins><script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script> </p>
+                        </div>
+                    </section>
+                    <ul class="pagination"> 
+                        <li>
+                            <a href="login-and-registration.html" class="button">Previous</a>
+                        </li>
+                        <li>
+                            <a href="#" class="page active">2</a>
+                        </li>                         
+                    </ul>
+                </div>
+            </div>
+            <!-- Sidebar -->             
+            <div id="sidebar"> 
+                <div class="inner"> 
+                    <!-- Menu -->                     
+                    <nav id="menu"> 
+                        <header class="major"> 
+                            <h2>Menu</h2> 
+                        </header>                         
+                        <ul> 
+                            <li>
+                                <a href="/">Homepage</a>
+                            </li>                             
+                            <li>
+                                <a href="terms.html">Terms and conditions</a>
+                            </li>
+                            <li>
+                                <a href="policy.html">Privacy Policy</a>
+                            </li>                             
+                        </ul>                         
+                    </nav>                     
+                    <!-- Section -->                     
+                    <section> 
+                        <header class="major"> 
+                            <h2>Get in touch</h2> 
+                        </header>                         
+                        <p>For any questions, remarks or any development requirement.</p> 
+                        <ul class="contact"> 
+                            <li class="fa-envelope-o">
+                                <a href="mailto:csurbier@idevotion.fr">csurbier@idevotion.fr</a>
+                            </li>                             
+                            <li class="fa-home">Carrer Riera blanca, 45-47
+                                <br/> 
+                                08028 Barcelona
+                            </li>                             
+                        </ul>                         
+                    </section>                     
+                    <!-- Footer -->                     
+                    <footer id="footer"> 
+                        <p class="copyright">&copy; Surbier Christophe. All rights reserved. Development: <a href="https://www.idevotion.fr">iDevotion</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> 
+                    </footer>                     
+                </div>                 
+            </div>             
+        </div>         
+        <!-- Scripts -->         
+        <script src="assets/js/jquery.min.js"></script>         
+        <script src="assets/js/browser.min.js"></script>         
+        <script src="assets/js/breakpoints.min.js"></script>         
+        <script src="assets/js/util.js"></script>         
+        <script src="assets/js/main.js"></script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="8488918554" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <div id="disqus_thread"></div>
+        <script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
+     *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
+     *  PLATFORM OR CMS.
+     *  
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+     *  https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    var disqus_config = function () {
+        // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = "https://www.ionicanddjangotutorial.com/design-and-setup.html";  
+        
+        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "dayone-designsetup"; 
+    };
+    
+    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document, s = d.createElement('script');
+        
+        // IMPORTANT: Replace EXAMPLE with your forum shortname!
+        s.src = 'https://https-www-ionicanddjangotutorial-com.disqus.com/embed.js'
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+        <noscript>
+            Please enable JavaScript to view the 
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+        comments powered by Disqus. </a>
+        </noscript>         
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://www.ionicanddjangotutorial.com",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "email": "csurbier@idevotion.fr",
+        "contactType": "customer support"
+      }]
+    }
+  </script>
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Course",
+      "name": "Ionic and Django tutorial",
+      "description": "A tutorial to learn mobile application development from scratch and on a concrete use case, using Ionic 4 as frontend and Django as backend.",
+      "provider": {
+        "@type": "Organization",
+        "name": "iDevotion",
+        "sameAs": "https://www.ionicanddjangotutorial.com"
+      }
+    }
+  </script>
+    </body>     
+</html>

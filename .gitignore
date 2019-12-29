@@ -1,6 +1,2 @@
 
-DayOneAndTwo/Backend/bikebackend/static/storage/
-
-DayOneAndTwo/Backend/bikebackend/\.idea/
-
-DaySix/Application/bikeapplication/node_modules/
+*.xcf

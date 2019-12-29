@@ -1,0 +1,341 @@
+<!DOCTYPE HTML> 
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+--> 
+<html> 
+    <head> 
+        <title>Design and setup Django project for a Ionic mobile application - Part 1</title>
+        <meta name="description" content="We will learn how to design our database model and setup our django project/environment which will be used by our Ionic application."/>
+        <meta name="author" content="surbier christophe">
+        <meta charset="utf-8"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/> 
+        <link rel="stylesheet" href="assets/css/main.css"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125461829-1"></script>
+        <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125461829-1');
+</script>         
+    </head>     
+    <body class="is-preload"> 
+        <!-- Wrapper -->         
+        <div id="wrapper"> 
+            <!-- Main -->             
+            <div id="main"> 
+                <div class="inner"> 
+                    <!-- Header -->                     
+                    <header id="header"> 
+                        <a href="index.html" class="logo"><strong>Ionic and Django Tutorial</strong></a>
+                        <ul class="icons">
+                            <li>Share on 
+                                <!-- AddToAny BEGIN -->
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_twitter"></a>
+                                    <a class="a2a_button_linkedin"></a>
+                                </div>
+                                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                                <!-- AddToAny END -->                                 
+                            </li>
+                        </ul>                         
+                    </header>                     
+                    <!-- Content -->                     
+                    <section> 
+                        <header class="main"> 
+                            <h1>Design and setup Django project for a Ionic application, Part 1/3</h1>
+                            <b>DAY 1 - September 2018</b>
+                        </header>                         
+                        <span class="image main"></span> 
+                        <p>
+				Before designing or setting up our project, we need to define what will be the application, and which features will be available. <br>
+				As i said <a href="learn-mobile-application-development.html" target="_blank">previously</a>, we are going to develop a real application 
+				with concrete use-cases, so we will develop a kind of <b>Find a &lt;something&gt;</b> application, where <b>&lt;something&gt;</b> 
+				could be anything you want, depending on your business, such as : <i>Restaurant, Doctor, Farmacy or even Bicycles, Bikes...</i> <br>For instance something like <a href="https://hybapps.com/app-theme/Find-a-Doctor/theme-using-maps-to-find-the-nearest-doctors/188" target="_blank">this template</a> </p>
+                        <div class="row"> 
+                            <div class="col-4 col-12-small"> 
+                                <p>So at least, we will have the following screens in our app:<br></p>
+                            </div>                             
+                            <div class="col-4 col-12-small"> 
+                                <ul>
+                                    <li>Login / Forgotten Password screens</li>                                     
+                                    <li>Register screen</li>                                     
+                                    <li>Display list of object</li>                                     
+                                    <li>Display Google maps</li>
+                                    <li>Detail page of an object</li>
+                                    <li>Integrate Paypal payment</li>
+                                    <li>History of transactions</li>
+                                    <li>Account page</li>
+                                    <li>About us page</li>
+                                </ul>                                 
+                            </div>                             
+                        </div>                         
+                        <p> <br>And because we need to define what is the &lt;something&gt;, we will develop a very common use case these days: <strong>Find a Bike</strong> application. <br>Users will be able to look around them thru a Google map or a list mode, in which we will display bikes around them. Then our users will be able to rent a
+				bike (we will integrate payments in our app), do a trip and free the bike once done. <br>Ok that's enough to begin the tutorial. We will add more feature later. So now that we know what will be build, it's time to move on to the <a href="#design">next section</a>.		 </p>
+                        <hr class="major"/> 
+                        <h2 id="design">Designing a database model for our ionic application</h2>
+                        <p> <br>Our two main entities for this application, will be of course the <b>User entity</b> and the <b>Bike entity</b>. <br>I didn't mention it before but we will use <a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a> as our database engine. <br><br> </p>
+                        <h3>User model:</h3>
+                        <div class="table-wrapper"> 
+                            <table class="alt"> 
+                                <thead> 
+                                    <tr> 
+                                        <th>Column</th> 
+                                        <th>Type</th> 
+                                        <th>Description</th>
+                                    </tr>                                     
+                                </thead>                                 
+                                <tbody> 
+                                    <tr> 
+                                        <td>id</td> 
+                                        <td>UUID</td> 
+                                        <td>Primary key</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>email</td> 
+                                        <td>String</td> 
+                                        <td>Our user email</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>username</td> 
+                                        <td>String</td> 
+                                        <td>The username of our user</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>facebookId</td> 
+                                        <td>String</td> 
+                                        <td>The user facebook identifier (used when login with Facebook)</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>android</td> 
+                                        <td>Boolean</td> 
+                                        <td>Is the user using an android device</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>iOS</td> 
+                                        <td>Boolean</td> 
+                                        <td>Is the user using an iOS device</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>acceptPush</td> 
+                                        <td>Boolean</td> 
+                                        <td>Did the user agreed to receive push on this device</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>pushToken</td> 
+                                        <td>String</td> 
+                                        <td>The token used to send push notifications to the user</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>valid</td> 
+                                        <td>Boolean</td> 
+                                        <td>We will use this field to activate or deactive a user account</td> 
+                                    </tr>                                     
+                                </tbody>                                 
+                            </table>                             
+                        </div>                         
+                        <br>
+                        <br>
+                        <h3>Bike model:</h3>
+                        <div class="table-wrapper"> 
+                            <table class="alt"> 
+                                <thead> 
+                                    <tr> 
+                                        <th>Column</th> 
+                                        <th>Type</th> 
+                                        <th>Description</th>
+                                    </tr>                                     
+                                </thead>                                 
+                                <tbody> 
+                                    <tr> 
+                                        <td>id</td> 
+                                        <td>UUID</td> 
+                                        <td>Primary key</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>reference</td> 
+                                        <td>String</td> 
+                                        <td>An internal reference of our bike</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>qrCode</td> 
+                                        <td>String</td> 
+                                        <td>The QRCode of the bike (to unlock it)</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>picture</td> 
+                                        <td>String</td> 
+                                        <td>A picture for our bike</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>location</td> 
+                                        <td>Pointfield</td> 
+                                        <td>A specific Django field for storing the location (latitude and longitude) of the bike</td> 
+                                    </tr>
+                                    <tr> 
+                                        <td>available</td> 
+                                        <td>Boolean</td> 
+                                        <td>Is the bike available</td> 
+                                    </tr>                                     
+                                    <tr> 
+                                        <td>valid</td> 
+                                        <td>Boolean</td> 
+                                        <td>We will use this field to activate or deactive a bike in the system</td> 
+                                    </tr>                                     
+                                </tbody>                                 
+                            </table>                             
+                        </div>
+                        <p> <br>
+					These are the minimal fields we will use to begin our project. We will certainly add other fields later as we will progress in the tutorial. <br>When designing a mobile application and it's backend, it is <b>highly recommended to design the full database model</b> (a.k.a all entities) before
+					starting developing the application. For our concern, there will be entities for storing relationship between users and bikes (rent, trip), for payment...
+					But for the beginning of this tutorial, we will begin with only User and Bike database tables. 	 </p> 
+                        <hr class="major"/> 
+                        <h2 id="setup">Setting up Django backend environment for our ionic application</h2>
+                        <p>All source code could be find <a href="https://github.com/csurbier/ionicanddjangotutorial" target="_blank">on my Github repository</a> <br><br>
+				  First of all, we will create our repositories (Backend,Frontend) which will contain our backend code (the Django part) and our frontend code (the IONIC application). <br> </p>
+                        <pre> <code>mkdir Backend;
+mkdir Frontend;</code></pre>
+                        <p>	Then inside our Backend directory, we will setup our virtual environment for our Django project. We will use python 3 for developing.</p>
+                        <pre> <code>
+virtualenv -p python3 djangobikeenv
+source djangobikeenv/bin/activate</code> </pre>
+                        <p>And that's all. You have now a virtual environment called <b>djangobikeenv</b> which has been activated and in which we will install our Django libraries.	</p> 
+                    </section>                     
+                    <ul class="pagination"> 
+                        <li>
+                            <span class="button disabled">Prev</span>
+                        </li>                         
+                        <li>
+                            <a href="#" class="page active">1</a>
+                        </li>                         
+                        <li>
+                            <a href="design-and-setup-2.html" class="page">2</a>
+                        </li>                         
+                        <li>
+                            <a href="design-and-setup-3.html" class="page">3</a>
+                        </li>                         
+                        <li>
+                            <a href="design-and-setup-2.html" class="button">Next</a>
+                        </li>                         
+                    </ul>                     
+                </div>
+            </div>             
+            <!-- Sidebar -->             
+            <div id="sidebar"> 
+                <div class="inner"> 
+                    <!-- Menu -->                     
+                    <nav id="menu"> 
+                        <header class="major"> 
+                            <h2>Menu</h2> 
+                        </header>                         
+                        <ul> 
+                            <li>
+                                <a href="index.html">Homepage</a>
+                            </li>                             
+                            <li>
+                                <a href="terms.html">Terms and conditions</a>
+                            </li>
+                            <li>
+                                <a href="policy.html">Privacy Policy</a>
+                            </li>                             
+                        </ul>                         
+                    </nav>                     
+                    <!-- Section -->                     
+                    <section> 
+                        <header class="major"> 
+                            <h2>Get in touch</h2> 
+                        </header>                         
+                        <p>For any questions, remarks or any development requirement.</p> 
+                        <ul class="contact"> 
+                            <li class="fa-envelope-o">
+                                <a href="mailto:csurbier@idevotion.fr">csurbier@idevotion.fr</a>
+                            </li>                             
+                            <li class="fa-home">Carrer Riera blanca, 45-47
+                                <br/> 
+                                08028 Barcelona
+                            </li>                             
+                        </ul>                         
+                    </section>                     
+                    <!-- Footer -->                     
+                    <footer id="footer"> 
+                        <p class="copyright">&copy; Surbier Christophe. All rights reserved. Development: <a href="https://www.idevotion.fr">iDevotion</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> 
+                    </footer>                     
+                </div>                 
+            </div>             
+        </div>         
+        <!-- Scripts -->         
+        <script src="assets/js/jquery.min.js"></script>         
+        <script src="assets/js/browser.min.js"></script>         
+        <script src="assets/js/breakpoints.min.js"></script>         
+        <script src="assets/js/util.js"></script>         
+        <script src="assets/js/main.js"></script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="8488918554" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <div id="disqus_thread"></div>
+        <script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
+     *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
+     *  PLATFORM OR CMS.
+     *  
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+     *  https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    var disqus_config = function () {
+        // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = "https://www.ionicanddjangotutorial.com/design-and-setup.html";  
+        
+        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "dayone-designsetup"; 
+    };
+    
+    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document, s = d.createElement('script');
+        
+        // IMPORTANT: Replace EXAMPLE with your forum shortname!
+        s.src = 'https://https-www-ionicanddjangotutorial-com.disqus.com/embed.js'
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+        <noscript>
+            Please enable JavaScript to view the 
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+        comments powered by Disqus. </a>
+        </noscript>         
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://www.ionicanddjangotutorial.com",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "email": "csurbier@idevotion.fr",
+        "contactType": "customer support"
+      }]
+    }
+  </script>
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Course",
+      "name": "Ionic and Django tutorial",
+      "description": "A tutorial to learn mobile application development from scratch and on a concrete use case, using Ionic 4 as frontend and Django as backend.",
+      "provider": {
+        "@type": "Organization",
+        "name": "iDevotion",
+        "sameAs": "https://www.ionicanddjangotutorial.com"
+      }
+    }
+  </script>
+    </body>     
+</html>

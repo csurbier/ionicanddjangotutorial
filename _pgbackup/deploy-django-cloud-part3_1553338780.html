@@ -1,0 +1,226 @@
+<!DOCTYPE HTML> 
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+--> 
+<html> 
+    <head> 
+        <title>Deploy a Django project on cloud using Clever-Cloud - Part 3 - Ionic and Django Tutorial</title>
+        <meta name="description" content="Third part of the django tutorial, we will deploy on the cloud."/>
+        <meta name="author" content="surbier christophe">
+        <meta charset="utf-8"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/> 
+        <link rel="stylesheet" href="assets/css/main.css"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125461829-1"></script>
+        <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-125461829-1');
+</script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>.mySlides {
+    display: none;
+}</style>
+    </head>     
+    <body class="is-preload"> 
+        <!-- Wrapper -->         
+        <div id="wrapper"> 
+            <!-- Main -->             
+            <div id="main"> 
+                <div class="inner"> 
+                    <!-- Header -->                     
+                    <header id="header"> 
+                        <a href="index.html" class="logo"><strong>Ionic and Django Tutorial</strong></a>
+                        <ul class="icons">
+                            <li>Share on 
+                                <!-- AddToAny BEGIN -->
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_twitter"></a>
+                                    <a class="a2a_button_linkedin"></a>
+                                </div>
+                                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                                <!-- AddToAny END -->                                 
+                            </li>
+                        </ul>                         
+                    </header>                     
+                    <section> 
+                        <header class="major"> 
+                            <h1>Deploy our Django project on cloud - Part 3</h1>
+                            <b>DAY 2 - March 2019</b>
+                        </header>                         
+                        <span class="image main"></span> 
+                        <div>
+                            <p>
+                            Since the last tutorial, few months occured (sorry for that too much work), so we need to update a little bit our requirement file to patch some django vulnerabilities. <br> </p>
+                            <pre><code>django&gt;=2.0.11
+psycopg2==2.7 --no-binary psycopg2
+pillow==5.1.0
+django-jet</code></pre>
+                            <p>to the <b>requirements.txt</b> file and launch the command:</p>
+                            <pre><code>pip3 install -r requirements.txt</code></pre>
+                            <p>Now we will create a clevercloud directory on our root directory(<b>mkdir clevercloud</b>) and add the following files: </p>
+                            <pre><code>buckets.json
+http.json
+python.json
+python-version</code></pre> 
+                            <p></p>
+                            <p>
+                         Our first file <b>buckets.json</b> will indicate where our files should be store. </p>
+                            <pre><code>[
+   {
+         "bucket_host": "bucket-e3824de2-e502-481f-a1ae-1111c47636fc-fsbucket.services.clever-cloud.com",
+         "folder": "/static/storage"
+ } 
+]</code></pre> 
+                            <p></p>
+                            <p>Or you can configure an environment variable (having a buckets.json file is deprecated now) </p>
+                            <pre><code>CC_FS_BUCKET=/static/storage:bucket-e3824de2-e502-481f-a1ae-1111c47636fc-fsbucket.services.clever-cloud.com</code></pre> 
+                            <p></p>
+                            <p>
+                    In the <b>http.json</b> file , we will specify that we want to use HTTPS </p>
+                            <pre><code>{
+    "force_https": true
+}</code></pre> 
+                            <p></p>
+                            <p>
+                In the <b>python.json</b> file, we will configure the wsgi for our project: </p>
+                            <pre><code>{ "deploy": {
+   "module": "bikebackend_wsgi",
+    "static": "/static/"
+  }
+} </code></pre> 
+                            <p></p>
+                            <p>
+            and we need to create our <b>bikebackend_wsgi</b> file (still on the root folder of our project): </p>
+                            <pre><code># *coding: utf-8*
+import sys
+import os
+sys.path.append(os.getenv('APP_HOME'))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'bikebackend.settings'
+os.environ['PYTHON_EGG_CACHE'] = '/tmp/.python-egg'
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application() </code></pre> 
+                            <p></p>
+                            <p>
+        In our last file <b>python_version</b> we will just indicate which version of python our project is using. </p>
+                            <pre><code>3</code></pre> 
+                            <p></p>
+                            <p>
+    Finally, we need to add some environment variables in Clever cloud console</p>
+                            <img src="images/clever/env_variable.png"/>
+                            <p>&nbsp;</p>
+                            <p>To deploy to clever cloud, each application is linked to a GIT directory, in which we need to put our code, commit and push. Once you push your code on the master branch, the code will automatically deploy on clever cloud and you can see logs in the clever cloud console. Don't hesitate to refer to <a href="https://www.clever-cloud.com/doc/python/" _target="blank">Clever cloud documentation</a> to know more about this process.</p>
+                            <p>
+                                Now that our application is deployed on the cloud, you can visit it using the domain name that Clever cloud has associated to your app (Use only for development purpose). </p>
+                        </div>
+                    </section>
+                    <ul class="pagination"> 
+                        <li>
+                            <a href="deploy-django-cloud-part2.html" class="button">Prev</a>
+                        </li>                         
+                        <li>
+                            <a href="deploy-django-cloud.html" class="page">1</a>
+                        </li>                         
+                        <li>
+                            <a href="deploy-django-cloud-part2.html" class="page">2</a>
+                        </li>                         
+                        <li>
+                            <a href="#" class="page active">3</a>
+                        </li>                         
+                    </ul>
+                </div>
+            </div>
+            <!-- Sidebar -->             
+            <div id="sidebar"> 
+                <div class="inner"> 
+                    <!-- Menu -->                     
+                    <nav id="menu"> 
+                        <header class="major"> 
+                            <h2>Menu</h2> 
+                        </header>                         
+                        <ul> 
+                            <li>
+                                <a href="index.html">Homepage</a>
+                            </li>                             
+                            <li>
+                                <a href="terms.html">Terms and conditions</a>
+                            </li>
+                            <li>
+                                <a href="policy.html">Privacy Policy</a>
+                            </li>                             
+                        </ul>                         
+                    </nav>                     
+                    <!-- Section -->                     
+                    <section> 
+                        <header class="major"> 
+                            <h2>Get in touch</h2> 
+                        </header>                         
+                        <p>For any questions, remarks or any development requirement.</p> 
+                        <ul class="contact"> 
+                            <li class="fa-envelope-o">
+                                <a href="mailto:csurbier@idevotion.fr">csurbier@idevotion.fr</a>
+                            </li>                             
+                            <li class="fa-home">Carrer Riera blanca, 45-47
+                                <br/> 
+                                08028 Barcelona
+                            </li>                             
+                        </ul>                         
+                    </section>                     
+                    <!-- Footer -->                     
+                    <footer id="footer"> 
+                        <p class="copyright">&copy; Surbier Christophe. All rights reserved. Development: <a href="https://www.idevotion.fr">iDevotion</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> 
+                    </footer>                     
+                </div>                 
+            </div>             
+        </div>         
+        <!-- Scripts -->         
+        <script src="assets/js/jquery.min.js"></script>         
+        <script src="assets/js/browser.min.js"></script>         
+        <script src="assets/js/breakpoints.min.js"></script>         
+        <script src="assets/js/util.js"></script>         
+        <script src="assets/js/main.js"></script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="8488918554" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <div id="disqus_thread"></div>
+        <script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
+     *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
+     *  PLATFORM OR CMS.
+     *  
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+     *  https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    var disqus_config = function () {
+        // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = "https://www.ionicanddjangotutorial.com/design-and-setup.html";  
+        
+        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "dayone-designsetup"; 
+    };
+    
+    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document, s = d.createElement('script');
+        
+        // IMPORTANT: Replace EXAMPLE with your forum shortname!
+        s.src = 'https://https-www-ionicanddjangotutorial-com.disqus.com/embed.js'
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+        <noscript>
+            Please enable JavaScript to view the 
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+        comments powered by Disqus. </a>
+        </noscript>         
+    </body>     
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE HTML> 
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+--> 
+<html> 
+    <head> 
+        <title>Manage recurring payments with Stripe in Ionic application</title>
+        <meta name="description" content="This tutorial explains how to manage recurring payments with stripe in a ionic application and using Django for the backend"/>
+        <meta name="author" content="surbier christophe">
+        <meta charset="utf-8"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/> 
+        <link rel="stylesheet" href="assets/css/main.css"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125461829-1"></script>
+        <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125461829-1');
+</script>         
+        <style>.responsiveimage {
+    width: 100%;
+    height: auto;
+}</style>
+    </head>     
+    <body class="is-preload"> 
+        <!-- Wrapper -->         
+        <div id="wrapper"> 
+            <!-- Main -->             
+            <div id="main"> 
+                <div class="inner"> 
+                    <!-- Header -->                     
+                    <header id="header"> 
+                        <a href="index.html" class="logo"><strong>Ionic and Django Tutorial</strong></a>
+                        <ul class="icons">
+                            <li>Share on 
+                                <!-- AddToAny BEGIN -->
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_twitter"></a>
+                                    <a class="a2a_button_linkedin"></a>
+                                </div>
+                                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                                <!-- AddToAny END -->                                 
+                            </li>
+                        </ul>                         
+                    </header>                     
+                    <!-- Content -->                     
+                    <section> 
+                        <header class="main"> 
+                            <h1>Recurring payments with Stripe in Ionic 4 application</h1>
+                            <b>October 2019</b>
+                        </header>                         
+                        <span class="image main"></span> 
+                        <p> <i><b>It is strongly recommended to have read the <a href="https://www.ionicanddjangotutorial.com/ionic-stripe-payment.html">part one</a> of this tutorial to understand this one.</b></i> </p>
+                        <p> 
+                        To manage recurring payments, you need to setup a payment intent (same process that for single payment), then display the stripe form to get user credit card detail, but this time when form is submitting instead of calling <b>stripe.handleCardPayment</b>, we will <b>handleCardSetup</b>. Within the result, we would have to associate our user with a customer in stripe system, and then save his payment method.   </p>
+                        <h2>
+                            Setup a payment intent with Ionic and Django backend</h2>
+                        <p>
+                          When our ionic view initialize, we ask our django backend, to set up a payment intent</p>
+                        <pre><code>if (this.apiService.networkConnected) {
+      this.apiService.getSetupIntentMethod().subscribe((results) =&#x3E; {
+        // console.log(&#x22;INTENT RECUP ==&#x3E;&#x22;)
+        // console.log(JSON.stringify(results)) 
+        this.paymentIntent = results;
+      })
+    }
+    else {
+      this.apiService.showNoNetwork()
+    }</code></pre>
+                        <p>
+                       	Setting up a payment intent, means that we will not use it to pay now, but later.                  </p>
+                        <pre><code>@api_view(['GET'])
+def setupIntentMethod(request):
+    stripe.api_key = STRIPE_API_KEY
+    setup_intent = stripe.SetupIntent.create(
+        usage='off_session',  # The default usage is off_session
+    )
+    return JsonResponse(setup_intent, safe=False)</code></pre>
+                        <p>
+                          We save the results of the api call in a variable into our ionic application, and then we setup our stripe form as in previous tutorial. The main difference will be managing the form once submitted. </p>
+                        <pre><code>if (!this.submitDone) {
+          this.submitDone = true
+          let clientSecret = this.paymentIntent[&#x22;client_secret&#x22;]
+          this.stripe.handleCardSetup(
+            clientSecret, this.card, {
+              payment_method_data: {
+                billing_details: {
+                  name: this.form.cardName,
+                  address: {
+                    postal_code: this.form.zipCode,
+                  },
+                  email: this.userManager.currentUser.email,
+                  phone: this.userManager.currentUser.phoneNumber
+                },
+              }
+            }
+          ).then((result) =&#x3E; {
+            // Handle result.error or result.paymentIntent
+            // console.log(&#x22;APRES SUBMIT RESULTAT&#x22;)
+            // console.log(JSON.stringify(result))
+            if (result.error) {
+              // Display error.message in your UI.
+              //this.apiService.stopLoading()
+              var errorElement = document.getElementById(&#x27;card-errors&#x27;);
+              errorElement.textContent = result.error.message;
+              this.submitDone = false;
+            } else {
+              this.createPaymentMethod(result)
+            }
+          })
+        }</code></pre> 
+                        <p>
+                            If the form has not already been submitted, we use the <b>stripe.handleCardSetup()</b> method and then if we get a result we call the <b>createPaymentMethod()</b> otherwise we display the error message received. </p>
+                        <pre><code> createPaymentMethod(result) {
+    // The setup has succeeded. Display a success message.
+    let params = {
+      &#x22;refUser&#x22;: this.userManager.currentUser.id,
+      &#x22;paymentMethodId&#x22;: result[&#x22;setupIntent&#x22;][&#x22;payment_method&#x22;],
+      &#x22;zipCode&#x22;: this.form.zipCode
+    }
+    if (this.apiService.networkConnected) {
+      this.apiService.showLoading()
+      this.apiService.createPaymentMethod(params).subscribe((reponse) =&#x3E; {</code></pre>
+                        <p>
+                            The <b>createPaymentMethod()</b> will call an api in our backend and passing the: </p>
+                        <table>
+                            <tr>
+                                <td>refUser</td>
+                                <td> The identifier of our user</td>
+                            </tr>
+                            <tr>
+                                <td>paymentMethodId</td>
+                                <td>The identifier of the payment setup that we received from stripe method <b>handleCardSetup()</b></td>
+                            </tr>
+                            <tr>
+                                <td>zipCode</td>
+                                <td>The zip code of the user that we asked in the stripe form</td>
+                            </tr>
+                        </table>
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- IonicDjangoBloc2 -->
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="3940223516" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                        <h2>
+                            Create a payment method with Stripe into a Django backend </h2>
+                        <p>
+                           On our api <b>createpaymentmethod</b> we will check if this user is already associated with a customer in the stripe platform. <br> To know this information, we will create two fields into our <b>AppUser</b> django models, the first one, will be the <b>stripeCustomerId</b> and the second one, will be the <b>stripePaymentMethodId</b>  </p>
+                        <pre><code>stripeCustomerId = pgcrypto.EncryptedCharField(max_length=100, default=&#x27;NONE&#x27;, blank=True)
+stripePaymentMethodId = pgcrypto.EncryptedCharField(max_length=100, default=&#x27;NONE&#x27;, blank=True) </code></pre>
+                        <p>
+                            Using the field <b>stripeCustomerId</b> we can know if we have already associated the user with a stripe customer. If not, we create a customer with stripe (using the email of our user) and then we save its id in our <b>user</b> model </p>
+                        <pre><code>user = AppUser.objects.get(id=refUser)
+if user.stripeCustomerId==&#x22;NONE&#x22;:
+	customer = stripe.Customer.create(email=user.email)
+    logger.info(&#x22;on creer customer %s&#x22;%customer)
+    user.stripeCustomerId=customer[&#x22;id&#x22;]</code></pre>
+                        <p>
+                            Now we need to attach the payment method id to this customer and we can save the payment method id into our AppUser model. </p>
+                        <pre><code>paymentMethod = stripe.PaymentMethod.attach(paymentMethodId, customer=user.stripeCustomerId)
+logger.info(&#x22;on a paymentMethod %s&#x22; % paymentMethod)
+user.stripePaymentMethodId = paymentMethodId
+user.save()</code></pre>
+                        <p>
+                            We could stop here since now our <b>AppUser</b> is associated with a stripe customer and a payment method. But in my Django models, i have created a <b>CreditCard</b> model to be able to display the credit card information in the Ionic application.<br>
+                            So i will use stripe to get the credit card detail information and save it in my <b>CreditCard</b> models. <br>
+                            During all the process, i catch the exceptions that can occured to send them back to the ionic application.<br> </p>
+                        <p>
+                            Here is the full code of the <b>createpaymentmethod</b> </p>
+                        <pre><code>@api_view([&#x27;POST&#x27;])
+def createpaymentmethod(request):
+    if request.method == &#x22;POST&#x22;:
+        print(&#x22;ON RECOIT DATA&#x22;)
+        #TODO : change for PROD
+        stripe.api_key = STRIPE_API_KEY
+        paymentMethod=None
+        try:
+            refUser = request.data[&#x22;refUser&#x22;]
+            paymentMethodId = request.data[&#x22;paymentMethodId&#x22;]
+            cvc = &#x22;&#x22;
+            lastDigit = &#x22;&#x22;
+            month = &#x22;&#x22;
+            year = &#x22;&#x22;
+            zipCode = request.data[&#x22;zipCode&#x22;]
+            user = AppUser.objects.get(id=refUser)
+            if user.stripeCustomerId==&#x22;NONE&#x22;:
+                customer = stripe.Customer.create(email=user.email)
+                logger.info(&#x22;on creer customer %s&#x22;%customer)
+                user.stripeCustomerId=customer[&#x22;id&#x22;]
+            paymentMethod = stripe.PaymentMethod.attach(paymentMethodId, customer=user.stripeCustomerId)
+            logger.info(&#x22;on a paymentMethod %s&#x22; % paymentMethod)
+            user.stripePaymentMethodId = paymentMethodId
+            user.save()
+            # retrieve card details
+            details = stripe.PaymentMethod.retrieve(paymentMethodId)
+            if details:
+                logger.info(&#x22;Details card %s&#x22;%details)
+                card = details[&#x22;card&#x22;]
+                lastDigit = card[&#x22;last4&#x22;]
+                month = card[&#x22;exp_month&#x22;]
+                year = card[&#x22;exp_year&#x22;]
+            #delete if credit card alreay exists
+            cards = CreditCard.objects.filter(refUser=refUser)
+            for card in cards:
+                card.delete()
+            #Create credit card
+            creditCard = CreditCard()
+            creditCard.refUser = user
+            creditCard.cvc = cvc
+            creditCard.lastDigit = lastDigit
+            creditCard.month = month
+            creditCard.year = year
+            creditCard.zipCode = zipCode
+            creditCard.save()
+            newdict = {&#x27;status&#x27;: &#x27;OK&#x27;,&#x22;stripeCustomerId&#x22;:user.stripeCustomerId,&#x22;lastDigit&#x22;:lastDigit}
+            return JsonResponse(newdict)
+        except stripe.error.CardError as e:
+            logger.error(e)
+            body = e.json_body
+            err = body.get(&#x27;error&#x27;, {})
+            newdict = {&#x27;status&#x27;: &#x27;KO&#x27;, &#x27;message&#x27;: err.get(&#x27;message&#x27;),&#x27;code&#x27;: err.get(&#x27;code&#x27;)}
+            return JsonResponse(newdict)
+        except Exception as e:
+            logger.error(e)
+            newdict = {&#x27;status&#x27;: &#x27;KO&#x27;}
+            return JsonResponse(newdict)
+    else:
+        return HttpResponse(status=501)</code></pre>
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- IonicDjangoBloc2 -->
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="3940223516" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                        <p>  </p>
+                    </section>                     
+                    <ul class="pagination"> 
+                        <li>
+                            <a href="#" class="page active">1</a>
+                        </li>                         
+                        <li>
+                            <a href="ionic-signin-with-apple-part2.html" class="button">Next</a>
+                        </li>                         
+                    </ul>                     
+                    <section>
+                        <div id="disqus_thread"></div>
+                        <script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
+     *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
+     *  PLATFORM OR CMS.
+     *  
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+     *  https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    var disqus_config = function () {
+        // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = "https://www.ionicanddjangotutorial.com/design-and-setup.html";  
+        
+        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "dayone-designsetup"; 
+    };
+    
+    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document, s = d.createElement('script');
+        
+        // IMPORTANT: Replace EXAMPLE with your forum shortname!
+        s.src = 'https://https-www-ionicanddjangotutorial-com.disqus.com/embed.js'
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+                    </section>
+                </div>
+            </div>             
+            <!-- Sidebar -->             
+            <div id="sidebar"> 
+                <div class="inner"> 
+                    <!-- Menu -->                     
+                    <nav id="menu"> 
+                        <header class="major"> 
+                            <h2>Menu</h2> 
+                        </header>                         
+                        <ul> 
+                            <li>
+                                <a href="index.html">Homepage</a>
+                            </li>                             
+                            <li>
+                                <a href="terms.html">Terms and conditions</a>
+                            </li>
+                            <li>
+                                <a href="policy.html">Privacy Policy</a>
+                            </li>                             
+                        </ul>                         
+                    </nav>                     
+                    <!-- Section -->                     
+                    <section> 
+                        <header class="major"> 
+                            <h2>Get in touch</h2> 
+                        </header>                         
+                        <p>For any questions, remarks or any development requirement.</p> 
+                        <ul class="contact"> 
+                            <li class="fa-envelope-o">
+                                <a href="mailto:csurbier@idevotion.fr">csurbier@idevotion.fr</a>
+                            </li>                             
+                            <li class="fa-home">Carrer Riera blanca, 45-47
+                                <br/> 
+                                08028 Barcelona
+                            </li>                             
+                        </ul>                         
+                    </section>                     
+                    <!-- Footer -->                     
+                    <footer id="footer"> 
+                        <p class="copyright">&copy; Surbier Christophe. All rights reserved. Development: <a href="https://www.idevotion.fr">iDevotion</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> 
+                    </footer>                     
+                </div>                 
+            </div>             
+        </div>         
+        <!-- Scripts -->         
+        <script src="assets/js/jquery.min.js"></script>         
+        <script src="assets/js/browser.min.js"></script>         
+        <script src="assets/js/breakpoints.min.js"></script>         
+        <script src="assets/js/util.js"></script>         
+        <script src="assets/js/main.js"></script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="8488918554" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <noscript>
+            Please enable JavaScript to view the 
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+        comments powered by Disqus. </a>
+        </noscript>         
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://www.ionicanddjangotutorial.com",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "email": "csurbier@idevotion.fr",
+        "contactType": "customer support"
+      }]
+    }
+  </script>
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Course",
+      "name": "Ionic and Signin with Apple",
+      "description": "Learn to implement signin with Apple with Ionic",
+      "provider": {
+        "@type": "Organization",
+        "name": "iDevotion",
+        "sameAs": "https://www.ionicanddjangotutorial.com"
+      }
+    }
+  </script>
+    </body>     
+</html>

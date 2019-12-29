@@ -1,0 +1,238 @@
+<!DOCTYPE HTML> 
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+--> 
+<html> 
+    <head> 
+        <title>oAuth2 with Django Rest Framework</title>
+        <meta name="description" content="Learn how to secure your django rest api with oAuth2 - Ionic and Django Tutorial"/>
+        <meta name="author" content="surbier christophe">
+        <meta charset="utf-8"/> 
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/> 
+        <link rel="stylesheet" href="assets/css/main.css"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125461829-1"></script>
+        <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-125461829-1');
+</script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>.mySlides {
+    display: none;
+}</style>
+        <style>.responsiveimage {
+    width: 100%;
+    height: auto;
+}</style>
+    </head>     
+    <body class="is-preload"> 
+        <!-- Wrapper -->         
+        <div id="wrapper"> 
+            <!-- Main -->             
+            <div id="main"> 
+                <div class="inner"> 
+                    <!-- Header -->                     
+                    <header id="header"> 
+                        <a href="/" class="logo"><strong>Ionic and Django Tutorial</strong></a>
+                        <ul class="icons">
+                            <li>Share on 
+                                <!-- AddToAny BEGIN -->
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_twitter"></a>
+                                    <a class="a2a_button_linkedin"></a>
+                                </div>
+                                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                                <!-- AddToAny END -->                                 
+                            </li>
+                        </ul>                         
+                    </header>                     
+                    <section> 
+                        <header class="major"> 
+                            <h1>oAuth2 with Django Rest Framework : How to secure your API</h1>
+                            <b>May 2019</b>
+                        </header>                         
+                        <span class="image main"></span> 
+                        <div>
+                            <h2>Introduction to Django oAuth Toolkit</h2>
+                            <p>Django oAuth Toolkit is a library to add oAuth2 authentification.</p>
+                            <p>
+                                In our <a href="https://www.ionicanddjangotutorial.com/api-with-django-rest-framework.html" target="_blank">previous tutorial</a> we start building an API, and will be able to use it without any authentification. The problem with this approach is that everybody can access this API and browse our data (even sensitive private data) or even worse delete some data. To avoid this hole of security, we are going to add oAuth2 authentification to our API. With oAuth2 to get access to an API, you need to provide a <b>token</b>. Without this token, the access to the API will be denied. To obtain a token, you need to call a specific url with credentials.</p>
+                            <h2>
+                                Install Django oAuth Toolkit </h2>
+                            <p>
+                                To install the framework, will will add the following line in our <b>requirements.txt</b> file  <pre><code>django-oauth-toolkit</code></pre> </p>
+                            <p>
+                        To install the packages, don't forget to launch in your terminal: <pre><code> pip3 install -r requirements.txt</code></pre> </p>
+                            <p>
+                    Now we need to reference the library in our <b>settings.py</b> file<pre><code>'oauth2_provider',</code></pre> inside our <b>INSTALLED_APPS</b> dictionnary. Here is the full definition: <pre><code>
+INSTALLED_APPS = [
+    'jet',
+    'backoffice.apps.BackofficeConfig',
+    'django.contrib.admin', 
+    'django.contrib.auth',
+    'django.contrib.contenttypes', 
+    'django.contrib.sessions', 
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_docs',
+    'oauth2_provider',
+    ]</code></pre> </p>
+                            <p>
+       In our <b>urls.py</b> file we will add the endpoint of oAuth2 to obtain a token. So we add: <pre><code>path('o/', include('oauth2_provider.urls')),</code></pre> </p>
+                            <p>
+        Final step of the installation is to apply the change to our database, since Django Oauth Toolkit is using it's own tables. <pre><code>python3 manage.py migrate</code></pre> </p>
+                            <p>
+            If you encounter errors during the migration it's because Django 2.1 drops the support of PostgreSQL 9.3, so we need to migrate our database to a new server. Don't worry since we are using  <b>Clever cloud</b> services, it will be very simple. Just go to your clever console and to your PostgreSQL add-on. You will find a menu (please refer to screenshot) Migrate.  <img src="images/djangorestframework/clevermigration.png" class="responsiveimage"> </p>
+                            <p> <br>From this migration tool, you should be able to select the new PostgreSQL version (11) and migrate easily. <br>Then don't forget to change your database connection information in your local environments variables since host, database name,... have changed. Once your settings are ok, you can launch the <pre><code>python3 manage.py migrate</code></pre> command again. </p>
+                            <p>
+     Now if we go back to our admin backoffice, we should be able to see a new section dedicated to <strong>Django oAuth Toolkit</strong> <img src="images/djangorestframework/admin-oauth.png" class="responsiveimage"> </p>
+                            <p>
+        We are now going to declare a new <b>Application</b> to finalize the <b>Django oAuth toolkit</b>. Before doing so, we need to create a new user and give him the superuser status, then this user will be used by oAuth2 toolkit. If you don't want to create a new user, and use your own user with oAuth2, it's also possible. But in that case, remember it and never delete your user OR the oAuth2 will not work properly anymore.<br>
+        In the admin interface, click the Add applications, and fillup the form: <img src="images/djangorestframework/addapplication.png" class="responsiveimage"> </p>
+                            <p> <table>
+                                    <tr>
+                                        <td>ClientId:</td>
+                                        <td>Auto generated</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User:</td>
+                                        <td>Please select the user you want to use</td>
+                                    </tr>
+                                    <tr>
+                                        <td>client type:</td>
+                                        <td>Please select public</td>
+                                    </tr>
+                                </table> </p>
+                        </div>
+                    </section>
+                    <ul class="pagination"> 
+                        <li>
+                            <a href="#" class="page active">1</a>
+                        </li>
+                        <li>
+                            <a href="api-with-django-rest-framework-part-two.html" class="button">Next</a>
+                        </li>                         
+                    </ul>
+                </div>
+            </div>
+            <!-- Sidebar -->             
+            <div id="sidebar"> 
+                <div class="inner"> 
+                    <!-- Menu -->                     
+                    <nav id="menu"> 
+                        <header class="major"> 
+                            <h2>Menu</h2> 
+                        </header>                         
+                        <ul> 
+                            <li>
+                                <a href="/">Homepage</a>
+                            </li>                             
+                            <li>
+                                <a href="terms.html">Terms and conditions</a>
+                            </li>
+                            <li>
+                                <a href="policy.html">Privacy Policy</a>
+                            </li>                             
+                        </ul>                         
+                    </nav>                     
+                    <!-- Section -->                     
+                    <section> 
+                        <header class="major"> 
+                            <h2>Get in touch</h2> 
+                        </header>                         
+                        <p>For any questions, remarks or any development requirement.</p> 
+                        <ul class="contact"> 
+                            <li class="fa-envelope-o">
+                                <a href="mailto:csurbier@idevotion.fr">csurbier@idevotion.fr</a>
+                            </li>                             
+                            <li class="fa-home">Carrer Riera blanca, 45-47
+                                <br/> 
+                                08028 Barcelona
+                            </li>                             
+                        </ul>                         
+                    </section>                     
+                    <!-- Footer -->                     
+                    <footer id="footer"> 
+                        <p class="copyright">&copy; Surbier Christophe. All rights reserved. Development: <a href="https://www.idevotion.fr">iDevotion</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p> 
+                    </footer>                     
+                </div>                 
+            </div>             
+        </div>         
+        <!-- Scripts -->         
+        <script src="assets/js/jquery.min.js"></script>         
+        <script src="assets/js/browser.min.js"></script>         
+        <script src="assets/js/breakpoints.min.js"></script>         
+        <script src="assets/js/util.js"></script>         
+        <script src="assets/js/main.js"></script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5248722664237652" data-ad-slot="8488918554" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <div id="disqus_thread"></div>
+        <script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
+     *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
+     *  PLATFORM OR CMS.
+     *  
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+     *  https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    var disqus_config = function () {
+        // Replace PAGE_URL with your page's canonical URL variable
+        this.page.url = "https://www.ionicanddjangotutorial.com/design-and-setup.html";  
+        
+        // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "dayone-designsetup"; 
+    };
+    
+    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document, s = d.createElement('script');
+        
+        // IMPORTANT: Replace EXAMPLE with your forum shortname!
+        s.src = 'https://https-www-ionicanddjangotutorial-com.disqus.com/embed.js'
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+        <noscript>
+            Please enable JavaScript to view the 
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+        comments powered by Disqus. </a>
+        </noscript>         
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://www.ionicanddjangotutorial.com",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "email": "csurbier@idevotion.fr",
+        "contactType": "customer support"
+      }]
+    }
+  </script>
+        <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Course",
+      "name": "Ionic and Django tutorial",
+      "description": "A tutorial to learn mobile application development from scratch and on a concrete use case, using Ionic 4 as frontend and Django as backend.",
+      "provider": {
+        "@type": "Organization",
+        "name": "iDevotion",
+        "sameAs": "https://www.ionicanddjangotutorial.com"
+      }
+    }
+  </script>
+    </body>     
+</html>
