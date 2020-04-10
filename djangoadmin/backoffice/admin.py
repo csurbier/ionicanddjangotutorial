@@ -58,6 +58,14 @@ class ProductAdmin(admin.ModelAdmin):
 
         return form
 
+    def save_model(self, request, obj, form, change):
+        if request.user.is_superuser:
+            pass
+        else:
+            #do your own custom code
+            pass
+        obj.save()
+
 # Register your models here.
 admin.site.register(Shop,ShopAdmin)
 admin.site.register(Product,ProductAdmin)

@@ -27,5 +27,17 @@ class Product(models.Model):
     updatedAt = models.DateTimeField(auto_now=True)
     available = models.BooleanField(default=True)
 
+    def clean(self):
+        from datetime import datetime, timedelta
+        from django.core.exceptions import ValidationError
+
+        today = datetime.now().date()
+        if self.endDate:
+            if self.endDate < today:
+                raise ValidationError("You cannot set an endDate in the past")
+
+        if self.withEndDate and self.endDate is None:
+            raise ValidationError("Please select an end date !")
+
     def __str__(self):
         return u'%s - %s' % (self.refShop,self.title)
