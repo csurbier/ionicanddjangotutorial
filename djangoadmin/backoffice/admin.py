@@ -1,6 +1,7 @@
 from django.contrib import admin
 from backoffice.models import *
-
+from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 
 class ShopAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -21,8 +22,20 @@ class ProductAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['user','refShop','title','price','withEndDate','endDate','description']}),
     ]
-    list_display = ('user','refShop','title')
+    list_display = ('user','goToEditProduct','refShop','title','has_low_price',)
     ordering = ('user','refShop',)
+
+    def has_low_price(self, obj):
+        return obj.price < 5
+    has_low_price.boolean=True
+
+    @mark_safe
+    def goToEditProduct(self, obj):
+        return format_html(
+            '<a class="button" href="/admin/backoffice/product/%s/change/?_changelist_filters=id__exact=%s" target="blank">Edit</a>&nbsp;' % (obj.pk,obj.pk))
+
+    goToEditProduct.short_description = 'Edit'
+    goToEditProduct.allow_tags = True
 
     def get_queryset(self, request):
         qs = super(ProductAdmin, self).get_queryset(request)
