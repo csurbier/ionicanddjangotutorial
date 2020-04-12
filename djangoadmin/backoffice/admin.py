@@ -2,6 +2,8 @@ from django.contrib import admin
 from backoffice.models import *
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
+from django.contrib.admin import AdminSite
+
 
 class ShopAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -79,6 +81,11 @@ class ProductAdmin(admin.ModelAdmin):
             pass
         obj.save()
 
+from django.contrib.admin import AdminSite
+class MyAdminSite(AdminSite):
+    login_template = 'backoffice/templates/admin/login.html'
+
+site = MyAdminSite()
 # Register your models here.
-admin.site.register(Shop,ShopAdmin)
-admin.site.register(Product,ProductAdmin)
+site.register(Shop,ShopAdmin)
+site.register(Product,ProductAdmin)
