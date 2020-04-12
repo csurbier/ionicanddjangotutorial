@@ -3,9 +3,16 @@ from backoffice.models import *
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.contrib.admin import AdminSite
+from django.contrib.auth.models import User, Group
+
+class shopplanning_inline(admin.TabularInline):
+    model = ShopPlanning
+    extra = 4
+    max_num=7
 
 
 class ShopAdmin(admin.ModelAdmin):
+    inlines = [shopplanning_inline]
     fieldsets = [
         (None, {'fields': ['user','name','email','address']}),
     ]
@@ -20,7 +27,14 @@ class ShopAdmin(admin.ModelAdmin):
             return qs.filter(user=request.user)
 
 
+class productplanning_inline(admin.TabularInline):
+    model = ProductPlanning
+    extra = 4
+    max_num=7
+
+
 class ProductAdmin(admin.ModelAdmin):
+    inlines = [productplanning_inline]
     fieldsets = [
         (None, {'fields': ['user','refShop','title','price','withEndDate','endDate','description']}),
     ]
@@ -89,3 +103,5 @@ site = MyAdminSite()
 # Register your models here.
 site.register(Shop,ShopAdmin)
 site.register(Product,ProductAdmin)
+site.register(User)
+site.register(Group)

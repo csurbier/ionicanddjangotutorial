@@ -15,6 +15,32 @@ class Shop(models.Model):
         return u'%s' % (self.name)
 
 
+WEEKDAYS = [
+    (1, ("Monday")),
+    (2, ("Tuesday")),
+    (3, ("Wednesday")),
+    (4, ("Thursday")),
+    (5, ("Friday")),
+    (6, ("Saturday")),
+    (0, ("Sunday")),
+]
+
+class ShopPlanning(models.Model):
+    class Meta:
+        ordering = ['refShop', 'day', 'startHour']
+    refShop = models.ForeignKey(Shop,on_delete=models.CASCADE,related_name='shopplanning')
+    day = models.IntegerField(choices=WEEKDAYS)
+    startHour = models.TimeField()
+    endHour = models.TimeField()
+
+    def __str__(self):
+          return ("%(premises)s %(day)s (%(from)s - %(to)s)") % {
+                'premises': self.refShop,
+                'day': self.day,
+                'from': self.startHour,
+                'to': self.endHour
+          }
+
 class Product(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     refShop = models.ForeignKey(Shop, db_index=True,on_delete=models.CASCADE)
@@ -41,3 +67,19 @@ class Product(models.Model):
 
     def __str__(self):
         return u'%s - %s' % (self.refShop,self.title)
+
+class ProductPlanning(models.Model):
+    class Meta:
+        ordering = ['refProduct', 'day', 'startHour']
+    refProduct = models.ForeignKey(Product,on_delete=models.CASCADE,related_name='productplanning')
+    day = models.IntegerField(choices=WEEKDAYS)
+    startHour = models.TimeField()
+    endHour = models.TimeField()
+
+    def __str__(self):
+          return ("%(premises)s %(day)s (%(from)s - %(to)s)") % {
+                'premises': self.refProduct,
+                'day': self.day,
+                'from': self.startHour,
+                'to': self.endHour
+          }
