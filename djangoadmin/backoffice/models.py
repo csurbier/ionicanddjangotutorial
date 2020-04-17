@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Shop(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     name = models.TextField()
@@ -11,7 +12,7 @@ class Shop(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return u'%s' % (self.name)
 
 
@@ -33,7 +34,24 @@ class ShopPlanning(models.Model):
     startHour = models.TimeField()
     endHour = models.TimeField()
 
-    def __str__(self):
+    def get_dayName(self):
+        if self.day==0:
+            return "Sunday"
+        elif self.day==1:
+            return "Monday"
+        elif self.day==2:
+            return "Tuesday"
+        elif self.day==3:
+            return "Wednesday"
+        elif self.day==4:
+            return "Thursday"
+        elif self.day==5:
+            return "Friday"
+        elif self.day==6:
+            return "Saturday"
+
+
+    def __unicode__(self):
           return ("%(premises)s %(day)s (%(from)s - %(to)s)") % {
                 'premises': self.refShop,
                 'day': self.day,
@@ -65,7 +83,7 @@ class Product(models.Model):
         if self.withEndDate and self.endDate is None:
             raise ValidationError("Please select an end date !")
 
-    def __str__(self):
+    def __unicode__(self):
         return u'%s - %s' % (self.refShop,self.title)
 
 class ProductPlanning(models.Model):
@@ -76,7 +94,7 @@ class ProductPlanning(models.Model):
     startHour = models.TimeField()
     endHour = models.TimeField()
 
-    def __str__(self):
+    def __unicode__(self):
           return ("%(premises)s %(day)s (%(from)s - %(to)s)") % {
                 'premises': self.refProduct,
                 'day': self.day,
