@@ -76,8 +76,25 @@
  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
  <script>
 django.jQuery(document).ready(function(){
+    django.jQuery("#id_price").change(function(){
+        console.log("Price change");
+        var price = $(this).val();
+        var url="http://127.0.0.1:8000/backoffice/checkPrice/"
+        $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request
+        data: {
+          'price': price
+        },
+        success: function (data) {   // `data` is the return of the `checkPrice` view function
+            console.log(data);
+            if (data["status"]=="KO"){
+                $("input#id_price").val(10);
+            }
+        }
+      });
+    });
 
-    if (django.jQuery('#id_withEndDate').is(':checked')) {
+     if (django.jQuery('#id_withEndDate').is(':checked')) {
          hide_date=false;
     } else {
          var elementDate = document.getElementsByClassName("form-row field-endDate");

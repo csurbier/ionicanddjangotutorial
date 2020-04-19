@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.http import JsonResponse
 
-# Create your views here.
+def checkPrice(request):
+    price = request.GET['price']
+    if int(price) > 10:
+       data = {"status": "KO"}
+    else:
+        data = {"status":"OK"}
+    return JsonResponse(data)
