@@ -161,6 +161,7 @@ class ProductAdmin(admin.ModelAdmin):
 from django.contrib.admin import AdminSite
 class MyAdminSite(AdminSite):
     login_template = 'backoffice/templates/admin/login.html'
+    index_template = 'backoffice/templates/admin/index.html'
 
 site = MyAdminSite()
 # Register your models here.
