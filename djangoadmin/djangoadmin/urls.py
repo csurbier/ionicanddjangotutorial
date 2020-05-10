@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+
 from backoffice.admin import site
 admin.site = site
 admin.autodiscover()
 
 urlpatterns = [
     url('', include('backoffice.urls')),
-    url(r'^admin/', admin.site.urls),
+    url('admin/', admin.site.urls),
 ]

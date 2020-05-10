@@ -19,6 +19,7 @@ class ShopAdmin(admin.ModelAdmin):
         (None, {'fields': ['user','name','email','address']}),
     ]
     list_display = ('user','name', 'email',  )
+    list_filter = (('user', admin.RelatedOnlyFieldListFilter),)
     ordering = ('user',)
 
     def get_queryset(self, request):
@@ -96,16 +97,59 @@ class productplanning_inline(admin.TabularInline):
         formset.__init__ = partialmethod(formset.__init__, initial=initial)
         return formset
 
+class ProductPriceFilter(admin.SimpleListFilter):
+    title = 'price'
+    parameter_name = 'price'
+    def lookups(self, request, model_admin):
+        """
+                Returns a list of tuples. The first element in each
+                tuple is the coded value for the option that will
+                appear in the URL query. The second element is the
+                human-readable name for the option that will appear
+                in the right sidebar.
+         """
+        return (("low_price","Filter by low price"),("high_price","Filter by high price"))
+
+    def queryset(self, request, queryset):
+        """
+                Returns the filtered queryset based on the value
+                provided in the query string and retrievable via
+                `self.value()`.
+         """
+        print("self value %s"%self.value())
+        if self.value()=="low_price":
+            return queryset.filter(price__lte=5)
+        elif self.value() == "high_price":
+            return queryset.filter(price__gt=5)
+        else:
+            return queryset.all()
+
+class UserShopFilter(admin.SimpleListFilter):
+    title = 'shop'
+    parameter_name = 'refShop'
+    def lookups(self, request, model_admin):
+        if 'user__id__exact' in request.GET:
+            id = request.GET['user__id__exact']
+            shops = set([c.refShop for c in model_admin.model.objects.all().filter(user=id)])
+        else:
+            shops = set([c.refShop for c in model_admin.model.objects.all()])
+        return [(s.id, s.name) for s in shops]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(refShop__id__exact=self.value())
+
 class ProductAdmin(admin.ModelAdmin):
     inlines = [productplanning_inline]
     fieldsets = [
         (None, {'fields': ['user','refShop','title','price','withEndDate','endDate','description']}),
     ]
     list_display = ('user','goToEditProduct','refShop','title','has_low_price',)
+    list_filter=('user',ProductPriceFilter,UserShopFilter,)
     ordering = ('user','refShop',)
 
     def has_low_price(self, obj):
-        return obj.price < 5
+        return obj.price <= 5
     has_low_price.boolean=True
 
     @mark_safe
