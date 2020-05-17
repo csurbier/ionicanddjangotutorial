@@ -4,6 +4,8 @@ import { Platform } from '@ionic/angular';
 import { ApiDjangoService } from '../../services/api-django.service';
 import { Router } from '@angular/router';
 import CryptoJS from 'crypto-js';
+import {Location} from '@angular/common';
+
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.page.html',
@@ -13,6 +15,7 @@ export class RegisterPagePage implements OnInit {
   registerCredentials = { username: '', email: '', password: '', passwordbis: '' };
   constructor(
     public apiService: ApiDjangoService,
+    public location: Location,
     public router: Router) {
 
   }
@@ -20,6 +23,9 @@ export class RegisterPagePage implements OnInit {
   ngOnInit() {
   }
 
+  back(){
+    this.location.back();
+  }
 
   register() {
 
