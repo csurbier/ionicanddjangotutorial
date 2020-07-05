@@ -1,0 +1,8 @@
+{
+  "name": "bikeapplication",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

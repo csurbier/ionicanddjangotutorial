@@ -1,0 +1,53 @@
+ion-content {
+    .login-container {
+        max-width: 362px;
+        width: 100%;
+        text-align: center;
+        margin: 16px auto 0;
+        padding: 16px;
+
+        .profile-img {
+            $userImg: 124px;
+            max-width: $userImg;
+            max-height: $userImg;
+            margin: 0 auto 30px;
+
+            img {
+                width: $userImg;
+                height: $userImg;
+                display: block;
+                border-radius: 50%;
+            }
+        }
+        .profile-image {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+      
+            display: inline-block;
+      
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+      
+          }
+
+        .button-continer {
+            padding: 0 18px;
+            ion-button {
+                --border-radius: 0;
+                height: 32px;
+                font-size: 16px;
+                margin: 40px 0;
+
+            }
+        }
+        ion-list{
+            ion-item{
+                &+ion-item{
+                    margin-top: 12px;
+                }
+            }
+        }
+    }
+  }

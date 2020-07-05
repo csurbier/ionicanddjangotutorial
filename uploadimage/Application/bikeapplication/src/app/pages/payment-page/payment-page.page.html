@@ -1,0 +1,52 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+      <h1>Payment</h1>
+    <ion-buttons>  
+     <ion-menu-button>
+       <ion-icon class="qt-menu"></ion-icon>
+     </ion-menu-button>
+   </ion-buttons>
+ </ion-toolbar> 
+</ion-header>
+<ion-content>
+  <form action="/" method="post" id="payment-form">
+    <ion-list mode="ios" form-list no-lines no-bg>
+      <ion-item text-wrap>
+        <ion-label fixed>FirstName</ion-label>
+        <ion-input type="text" #nom placeholder="FirstName" name="firstName"  [(ngModel)]="form.firstName"></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label fixed>LastName</ion-label>
+        <ion-input type="text" #prenom placeholder="LastName" name="lastName"  [(ngModel)]="form.lastName"></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+          <ion-label fixed>Email*</ion-label>
+          <ion-input type="email" #email placeholder="Email" name="email"  [(ngModel)]="form.email"></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+          <ion-label fixed>Address*</ion-label>
+          <ion-input type="text" #adresse placeholder="Address" name="address"  [(ngModel)]="form.address"></ion-input>
+      </ion-item>
+      <ion-item text-wrap>
+          <ion-label fixed>Zip Code*</ion-label>
+          <ion-input type="text" #codePostal placeholder="Zip code" name="zipCode"  [(ngModel)]="form.zipCode"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="form-row">
+      <div id="card-element">
+        <!-- a Stripe Element will be inserted here. -->
+      </div>
+
+      <!-- Used to display Element errors -->
+      <div id="card-errors" role="alert"></div>
+    </div>
+    <ion-button  type="submit" color="success" mode="ios"  fill="solid"> 
+      Pay {{priceToPay}}$
+     </ion-button>
+  </form>
+ 
+  <div text-center>
+    <p color="primary" small>Secured payment. We will never know your credit card number</p>
+  </div>
+
+</ion-content>
