@@ -11,4 +11,5 @@ urlpatterns = [
     path('', include(router.urls)),
     url(r'^createpaymentintent/$', createpaymentintent,name='createpaymentintent'),
     path('bikes/', BikeListView.as_view(), name='bikes_list'),
+    url(r'^uploadphotobinary/$', PhotoUploadView.as_view()),
 ]

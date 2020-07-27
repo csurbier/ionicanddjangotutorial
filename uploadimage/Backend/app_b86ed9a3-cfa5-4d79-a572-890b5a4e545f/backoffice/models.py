@@ -68,3 +68,10 @@ class Bike(models.Model):
     class Meta:
         verbose_name = ('Bike')
         verbose_name_plural = ('Bikes')
+
+
+class Photo(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    file = models.ImageField(upload_to='dossiers/(%Y_%m)/', null=True, blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updatedAt = models.DateTimeField(auto_now=True)
