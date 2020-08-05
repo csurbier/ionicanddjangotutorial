@@ -10,7 +10,6 @@ declare var google;
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
    
   items: any;
   autocomplete: any;
@@ -25,9 +24,6 @@ export class HomePage {
   zipCode : string="";
   constructor(
     public platform: Platform) {
-     
-   
-   
     this.initPage()
   }
 
@@ -85,9 +81,7 @@ export class HomePage {
  
   initPage() {
     // Create a new session token.
-   
     this.sessionToken = new google.maps.places.AutocompleteSessionToken();
-
     this.acService = new google.maps.places.AutocompleteService();
     this.items = [];
     this.autocomplete = {
@@ -139,8 +133,6 @@ export class HomePage {
     else{
       this.destinationCity  = item.structured_formatting.main_text
     }
-     
-
   }
 
   updateSearch() {
