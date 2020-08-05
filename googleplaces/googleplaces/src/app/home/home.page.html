@@ -1,0 +1,32 @@
+<ion-header no-border mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-title>Search google places</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <div class="page-flex-align" padding>
+    <div class="top-content">
+      <h1>Destination address</h1>
+      <p>Please type the address you would like to find</p>
+      <ion-searchbar class="location-search" mode="ios" [(ngModel)]="autocomplete.query" [showCancelButton]="false" (ionInput)="updateSearch()"
+      (ionCancel)="dismiss()" (ionClear)="dismiss()" placeholder="">
+    </ion-searchbar>
+    <p class="small" *ngIf="selectedItem">{{autocomplete.query}}</p>
+
+      
+      <ion-list lines="full">
+     
+        <ion-item  *ngFor="let item of items" (click)="chooseItem(item)">
+          <ion-icon slot="end" color="success" size="small" class="wg-arrow-line-left">
+          </ion-icon>
+          <ion-label text-wrap>
+            <h2>{{item.structured_formatting.main_text}}</h2>
+            <p>{{item.structured_formatting.secondary_text}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-button [disabled]="buttonDisabled" mode="ios" expand="block" shape="round" (click)="validDestination()">
+        Validate</ion-button>
+    </div>
+  </div>
+</ion-content>

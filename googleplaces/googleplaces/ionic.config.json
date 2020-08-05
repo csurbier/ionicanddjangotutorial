@@ -1,0 +1,7 @@
+{
+  "name": "googleplaces",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

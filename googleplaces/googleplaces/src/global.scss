@@ -1,0 +1,235 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+ion-button {
+    &:not([fill="clear"]) {
+        height: 54px;
+        font-size: 17px;
+    }
+
+}
+
+ion-header {
+    ion-toolbar {
+        --padding-top: 16px;
+        --padding-bottom: 8px;
+        --padding-start: 30px;
+        --padding-end: 30px;
+
+        ion-button {
+            &[slot="icon-only"] {
+                margin: 0;
+                --padding-start: 0;
+                --padding-end: 0;
+
+                ion-icon {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
+
+.page-flex-align {
+    &.content-center {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    min-height: 100%;
+    padding: 30px;
+
+    &.code {
+        padding-top: 50px;
+
+        .top-content {
+            ion-list {
+                margin-top: 32px;
+                margin-bottom: 16px;
+            }
+
+            ion-button {
+                 
+                font-size: 13px;
+            }
+        }
+    }
+
+    .top-content {
+        h1 {
+            color: var(--ion-color-title);
+            font-size: 30px;
+            margin: 0 0 8px;
+        }
+
+        >p {
+            margin-top: 0;
+            font-size: 15px;
+            color: var(--ion-pra-color);
+            line-height: 18px;
+        }
+
+        ion-list {
+            margin-top: 34px;
+            margin-bottom: 16px;
+        }
+
+        
+
+       
+    }
+}
+
+ion-row {
+    &[lrm] {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+}
+
+ion-list {
+    &[form] {
+        ion-item {
+            &.item {
+                --border-width: 1px;
+                --border-radius: 5px;
+                --min-height: 60px;
+                --ion-border-color: rgba(0, 0, 0, 0.10);
+
+                ion-select {
+                    --padding-start: 0;
+                    width: 100%;
+                    //font-size: 1.8rem;
+                    max-width: unset;
+                }
+
+                &+.item {
+                    margin-top: 16px;
+                }
+            }
+
+        }
+
+        ion-row {
+            &[lrm] {
+                margin-left: -8px;
+                margin-right: -8px;
+            }
+
+            ion-col {
+                padding: 8px;
+                padding-top: 16px;
+            }
+        }
+    }
+
+    
+}
+
+ion-footer {
+    &[auth-button] {
+        ion-toolbar {
+            padding: 10px;
+            padding-top: 27px;
+           
+            ion-button {
+                min-width: 240px;
+                font-weight: 500;
+                font-size: 17px;
+
+                &+ion-button {
+                    margin-top: 16px;
+                }
+            }
+
+            p {
+                ion-text {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    font-size: 13px;
+                    line-height: 16px;
+
+                    ion-icon {
+                        font-size: 16px;
+                        margin-right: 5px;
+                    }
+
+                    span {
+                        position: relative;
+                        top: 2px;
+                    }
+                }
+            }
+        }
+
+    }
+
+}
+ 
+ion-searchbar {
+    &.location-search {
+        margin-right: -5px;
+        margin-left: -5px;
+        padding: 0 5px;
+        width: auto;
+
+        .searchbar-input-container {
+            --background: #fff;
+            -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            min-height: 44px;
+
+            .searchbar-input {
+                border-radius: 5px;
+
+            }
+        }
+    }
+}
+ 
