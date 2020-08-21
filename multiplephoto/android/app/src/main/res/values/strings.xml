@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">multiplephoto</string>
+    <string name="title_activity_main">multiplephoto</string>
+    <string name="package_name">com.ionicanddjangotutorials.multiplephoto</string>
+    <string name="custom_url_scheme">com.ionicanddjangotutorials.multiplephoto</string>
+</resources>

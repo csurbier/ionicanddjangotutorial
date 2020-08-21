@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Multiple photo capture
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <strong>Ready to start?</strong>
+    <ion-button color="primary" (click)="openCamera()">Take photos</ion-button>
+  
+  <div class="section-body">
+    <ion-row>
+      <ion-col size="4" *ngFor="let item of pictures">
+        <div class="image-card">
+          <img [src]="item" alt="">
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+  
+</div>
+</ion-content>
