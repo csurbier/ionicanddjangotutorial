@@ -1,0 +1,7 @@
+{
+  "name": "multiplephoto",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

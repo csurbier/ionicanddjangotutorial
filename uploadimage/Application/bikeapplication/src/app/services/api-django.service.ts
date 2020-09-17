@@ -25,6 +25,7 @@ export class ApiDjangoService {
   urlPwdOublie = this.virtualHostName + "/account/reset_password";
   getPaymentIntentUrl = this.virtualHostName + this.apiPrefix +  "/createpaymentintent/";
   getBikesAroundUrl = this.virtualHostName + this.apiPrefix +  "/bikes/";
+  getUploadPhotoUrlBinary= this.virtualHostName + this.apiPrefix + "/uploadphotobinary/"
   constructor(public http: HttpClient,
     public loadingController: LoadingController,
     public alertCtrl: AlertController,
@@ -271,6 +272,29 @@ getBikesAround(latitude,longitude){
         console.log(error);// Error getting the data
       });
   });
+}
+
+
+uploadPhoto(formData) {
+ 
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", "Bearer "+ this.tokenSSO);
+
+  var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formData
+  };
+  return Observable.create(observer => {
+  fetch(this.getUploadPhotoUrlBinary, requestOptions)
+  .then(response => response.json())
+  .then(result => {
+      
+      observer.next(result)
+  })
+  .catch(error => {console.log('error', error);
+      observer.next()});
+  })
 }
 
 

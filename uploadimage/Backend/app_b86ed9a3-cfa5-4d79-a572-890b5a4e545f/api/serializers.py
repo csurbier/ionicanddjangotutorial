@@ -16,3 +16,9 @@ class BikeSerializer(serializers.ModelSerializer):
 
     def get_distance(self, obj):
         return obj.distance_to_user.km
+
+
+class PhotoUploadSerializer(ModelSerializer):
+    class Meta:
+        model = Photo
+        fields = '__all__'
