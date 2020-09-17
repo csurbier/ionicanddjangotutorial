@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Demo VideoPlayer    
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <div class="videoplayer">
+    <vg-player (onPlayerReady)="onPlayerReady($event)">
+      <video class="videoplayer" [vgMedia]="media" #media id="singleVideo" preload="auto" controls crossorigin>
+        <source [src]="urlVideo" type="video/mp4">
+      </video>
+    </vg-player>
+  </div>
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-padding">
+      <ion-col *ngFor="let item of items" size="4" class="ion-padding">
+        <div class="module">
+        <ion-item fill="clear" class="ion-no-padding" (click)="playVideo(item)">
+          <ion-img src="{{item.imagePreview}}" alt="Image not found"></ion-img>
+         
+        </ion-item>
+        <div  class="ion-no-padding">
+          <h4 class="overlay-text">{{item.title}}</h4>
+        </div>
+      </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

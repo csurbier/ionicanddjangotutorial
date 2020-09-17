@@ -1,0 +1,57 @@
+.videoplayer{
+  height: 300px;
+}
+ion-grid{
+  height: 40%;
+  margin-top: 0px;
+}
+ion-row{
+ margin-top: -10px;
+ ion-col{
+  margin-top: -10px;
+  }
+}
+
+.module{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+   
+   ion-item{
+    border-color: darkblue;
+    border-width: .2em; 
+    border-style:solid; margin-bottom : -1px;
+    --inner-padding-bottom:0px!important;
+    --inner-padding-end:0px!important;
+    --inner-padding-start:0px!important;
+    --inner-padding-top:0px!important;
+    width: 100px;
+    @media (min-width: 600px) {
+      width: 200px!important;;
+    }
+    ion-img {
+      border-radius: 10px;
+      display: block!important;
+      object-fit: fill!important;
+      width: 100%!important;
+     
+  }
+    div{
+      display: flex;
+      justify-content: center;
+      color: white;
+      bottom: 0px;
+      position: absolute;
+      width: 100%;
+      background: rgba(6, 110, 237, 0.282);
+     
+    }
+  }
+}
+.overlay-text{
+  margin-top: 2px;
+      font-size: 16px;
+       margin-bottom: 4px;
+       color: darkblue;
+
+}
