@@ -1,27 +1,22 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.page-flex-align{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.email{
+  padding-bottom: 20px;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.spacewithscan{
+ margin-top: 30px;
 }
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+.paiement{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .paypalbutton {
+      width: 150px;
+      height: 34px;
+      --background: var(--ion-color-bouton);
+  }
 }
