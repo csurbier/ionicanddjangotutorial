@@ -33,16 +33,16 @@ export class HomePage {
         sandbox: this.PAYPAL_CLIENT_ID,
       },
       commit: false,
-      payment: (data, actions) => {
-        // console.log("data is", data, actions);
-        return actions.payment.create({
-          payment: {
-            transactions: [
-              { amount: { total: this.priceToPay, currency: 'EUR' } }
-            ]
-          }
+      createOrder: (data, actions)=> {
+        return actions.order.create({
+            purchase_units: [{
+                amount: {
+                    value: this.priceToPay,
+                    currency: 'EUR' 
+                }
+            }]
         });
-      },
+    },
       // Finalize the transaction
       onApprove: (data, actions) => {
         //console.log(data)
