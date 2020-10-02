@@ -1,5 +1,6 @@
 import { ApiServiceService } from './../api-service.service';
 import { Component } from '@angular/core';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -8,18 +9,19 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  loading=false;
   constructor(public apiService:ApiServiceService) {
 
-
+    this.apiService.loadingObserver
+    .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
+    .subscribe((loading) => {
+      this.loading = loading
+    });
   }
 
   clickButton(){
-    this.apiService.showLoader().then(()=>{
       this.apiService.getJsonData().subscribe((data)=>{
         console.log(data)
-        this.apiService.stopLoader()
       })
-    })
-  
   }
 }

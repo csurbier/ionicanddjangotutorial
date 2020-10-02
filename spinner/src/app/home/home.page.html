@@ -15,6 +15,7 @@
 
   <div id="container">
     <strong>Ready to test?</strong>
+    <ion-spinner name="bubbles" *ngIf="loading"></ion-spinner>
     <ion-button shape="round" (click)="clickButton()">Get JSON Data</ion-button>
   </div>
 </ion-content>
