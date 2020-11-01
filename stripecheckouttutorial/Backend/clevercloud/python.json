@@ -1,0 +1,5 @@
+{ "deploy": {
+   "module": "stripecheckout_wsgi",
+    "static": "/static/"
+  }
+}

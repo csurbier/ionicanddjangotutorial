@@ -1,0 +1,224 @@
+[31/Oct/2020 17:14:12] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[31/Oct/2020 17:14:50] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[31/Oct/2020 17:15:27] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/stripecheckout/urls.py changed, reloading.
+[31/Oct/2020 17:15:27] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[31/Oct/2020 17:15:36] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[31/Oct/2020 17:16:22] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[31/Oct/2020 17:16:33] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 12:12:43] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 12:12:55] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 12:13:15] ERROR [django.request:222] Internal Server Error: /create-checkout-session/
+Traceback (most recent call last):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/utils/datastructures.py", line 76, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'currency'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py", line 63, in createCheckoutSession
+    currency =   request.POST["currency"]
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/utils/datastructures.py", line 78, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'currency'
+[01/Nov/2020 12:13:15] ERROR [django.server:157] "POST /create-checkout-session/ HTTP/1.1" 500 88218
+[01/Nov/2020 12:13:39] ERROR [django.request:222] Internal Server Error: /create-checkout-session/
+Traceback (most recent call last):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/utils/datastructures.py", line 76, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'currency'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py", line 63, in createCheckoutSession
+    currency =   request.POST["currency"]
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/utils/datastructures.py", line 78, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'currency'
+[01/Nov/2020 12:13:39] ERROR [django.server:157] "POST /create-checkout-session/?currency=eur&quantity=1&price=1000&productName=my%20product HTTP/1.1" 500 89482
+[01/Nov/2020 12:14:37] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py changed, reloading.
+[01/Nov/2020 12:14:38] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 12:14:42] ERROR [django.request:222] Internal Server Error: /create-checkout-session/
+Traceback (most recent call last):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py", line 63, in createCheckoutSession
+    currency =   request.POST.get["currency"]
+TypeError: 'method' object is not subscriptable
+[01/Nov/2020 12:14:42] ERROR [django.server:157] "POST /create-checkout-session/?currency=eur&quantity=1&price=1000&productName=my%20product HTTP/1.1" 500 80785
+[01/Nov/2020 12:16:04] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py changed, reloading.
+[01/Nov/2020 12:16:05] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 12:16:09] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py changed, reloading.
+[01/Nov/2020 12:16:09] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 12:16:15] ERROR [django.request:222] Internal Server Error: /create-checkout-session/
+Traceback (most recent call last):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/utils/datastructures.py", line 76, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'currency'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py", line 63, in createCheckoutSession
+    currency = request.POST["currency"]
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/utils/datastructures.py", line 78, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'currency'
+[01/Nov/2020 12:16:15] ERROR [django.server:157] "POST /create-checkout-session/?currency=eur&quantity=1&price=1000&productName=my%20product HTTP/1.1" 500 89478
+[01/Nov/2020 12:17:27] ERROR [django.request:222] Internal Server Error: /create-checkout-session/
+Traceback (most recent call last):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/utils/datastructures.py", line 76, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'currency'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py", line 63, in createCheckoutSession
+    currency = request.POST["currency"]
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/utils/datastructures.py", line 78, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'currency'
+[01/Nov/2020 12:17:27] ERROR [django.server:157] "POST /create-checkout-session/ HTTP/1.1" 500 88214
+[01/Nov/2020 12:18:03] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py changed, reloading.
+[01/Nov/2020 12:18:03] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 12:18:31] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py changed, reloading.
+[01/Nov/2020 12:18:32] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 12:19:40] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 12:19:48] INFO [django.server:157] "POST /create-checkout-session/ HTTP/1.1" 200 95
+[01/Nov/2020 12:29:03] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 12:29:05] WARNING [django.request:222] Not Found: /
+[01/Nov/2020 12:29:05] WARNING [django.server:157] "GET / HTTP/1.1" 404 3039
+[01/Nov/2020 12:29:05] WARNING [django.request:222] Not Found: /favicon.ico
+[01/Nov/2020 12:29:05] WARNING [django.server:157] "GET /favicon.ico HTTP/1.1" 404 3090
+[01/Nov/2020 12:29:40] INFO [django.server:157] "POST /create-checkout-session/ HTTP/1.1" 200 95
+[01/Nov/2020 12:29:48] ERROR [django:33] join() argument must be str, bytes, or os.PathLike object, not 'dict'
+[01/Nov/2020 12:29:49] ERROR [django.request:222] Internal Server Error: /checkout-session-success/
+Traceback (most recent call last):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py", line 36, in checkoutSessionSuccess
+    return render('bo/templates/bo/error.html', {})
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/template/backends/django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/template/engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/template/loaders/base.py", line 18, in get_template
+    for origin in self.get_template_sources(template_name):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/template/loaders/filesystem.py", line 36, in get_template_sources
+    name = safe_join(template_dir, template_name)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/utils/_os.py", line 17, in safe_join
+    final_path = abspath(join(base, *paths))
+  File "/usr/lib/python3.8/posixpath.py", line 90, in join
+    genericpath._check_arg_types('join', a, *p)
+  File "/usr/lib/python3.8/genericpath.py", line 152, in _check_arg_types
+    raise TypeError(f'{funcname}() argument must be str, bytes, or '
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'dict'
+[01/Nov/2020 12:29:49] ERROR [django.server:157] "GET /checkout-session-success/?session_id=cs_test_0Tu7yPDMHdjik9TrXq6EWadL2umPcWNhRZ0O7YorUkD9R45oO2Kq8iX4 HTTP/1.1" 500 193821
+[01/Nov/2020 12:30:57] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py changed, reloading.
+[01/Nov/2020 12:30:58] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 12:31:00] ERROR [django:33] No API key provided. (HINT: set your API key using "stripe.api_key = <API-KEY>"). You can generate API keys from the Stripe web interface.  See https://stripe.com/api for details, or email support@stripe.com if you have any questions.
+[01/Nov/2020 12:31:00] ERROR [django.request:222] Internal Server Error: /checkout-session-success/
+Traceback (most recent call last):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py", line 18, in checkoutSessionSuccess
+    session = stripe.checkout.Session.retrieve(session_id)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/stripe/api_resources/abstract/api_resource.py", line 12, in retrieve
+    instance.refresh()
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/stripe/api_resources/abstract/api_resource.py", line 16, in refresh
+    self.refresh_from(self.request("get", self.instance_url()))
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/stripe/stripe_object.py", line 243, in request
+    response, api_key = requestor.request(method, url, params, headers)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/stripe/api_requestor.py", line 119, in request
+    rbody, rcode, rheaders, my_api_key = self.request_raw(
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/stripe/api_requestor.py", line 289, in request_raw
+    raise error.AuthenticationError(
+stripe.error.AuthenticationError: No API key provided. (HINT: set your API key using "stripe.api_key = <API-KEY>"). You can generate API keys from the Stripe web interface.  See https://stripe.com/api for details, or email support@stripe.com if you have any questions.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/venve/lib/python3.8/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py", line 35, in checkoutSessionSuccess
+    pusher_client.trigger('purchase' + session_id, 'error', {'message': 'payment error'})
+UnboundLocalError: local variable 'pusher_client' referenced before assignment
+[01/Nov/2020 12:31:00] ERROR [django.server:157] "GET /checkout-session-success/?session_id=cs_test_0Tu7yPDMHdjik9TrXq6EWadL2umPcWNhRZ0O7YorUkD9R45oO2Kq8iX4 HTTP/1.1" 500 107583
+[01/Nov/2020 12:31:37] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py changed, reloading.
+[01/Nov/2020 12:31:37] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 12:31:38] ERROR [django:32] No API key provided. (HINT: set your API key using "stripe.api_key = <API-KEY>"). You can generate API keys from the Stripe web interface.  See https://stripe.com/api for details, or email support@stripe.com if you have any questions.
+[01/Nov/2020 12:31:39] INFO [django.server:157] "GET /checkout-session-success/?session_id=cs_test_0Tu7yPDMHdjik9TrXq6EWadL2umPcWNhRZ0O7YorUkD9R45oO2Kq8iX4 HTTP/1.1" 200 664
+[01/Nov/2020 13:30:14] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 13:49:09] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 13:49:12] WARNING [django.request:222] Not Found: /
+[01/Nov/2020 13:49:12] WARNING [django.server:157] "GET / HTTP/1.1" 404 3233
+[01/Nov/2020 13:49:54] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/urls.py changed, reloading.
+[01/Nov/2020 13:49:54] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 13:50:16] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py changed, reloading.
+[01/Nov/2020 13:50:16] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 13:50:47] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/urls.py changed, reloading.
+[01/Nov/2020 13:50:48] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 13:50:50] INFO [django.server:157] "GET / HTTP/1.1" 200 138
+[01/Nov/2020 13:55:19] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py changed, reloading.
+[01/Nov/2020 13:55:20] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 14:02:16] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 14:02:34] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/admin.py changed, reloading.
+[01/Nov/2020 14:02:35] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 14:02:44] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/admin.py changed, reloading.
+[01/Nov/2020 14:02:44] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[01/Nov/2020 14:03:49] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/stripecheckouttutorial/Backend/app_e06ec9e7-b121-44fa-a383-54bbda3f9706/bo/views.py changed, reloading.
+[01/Nov/2020 14:03:50] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
