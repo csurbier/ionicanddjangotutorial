@@ -1,0 +1,7 @@
+{
+  "name": "stripecheckout",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
