@@ -1,0 +1,31 @@
+ion-content {
+    --padding-top: 40%;
+    --padding-start: 5%;
+    --padding-end: 5%;
+    --background: url('https://images.pexels.com/photos/816608/pexels-photo-816608.jpeg?cs=srgb&dl=pexels-alex-andrews-816608.jpg&fm=jpg') 0 0/100% 100% no-repeat;
+}
+ 
+.input-group {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+ 
+.errors {
+    font-size: small;
+    color: #fff;
+    background: var(--ion-color-danger);
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.forget-pass {
+    width: 100%;
+    font-size: 11px;
+    font-family: "Helvetica";
+    --color: white;
+    text-transform: capitalize;
+    margin-top: 10px;
+    margin-bottom: 35px;
+  }

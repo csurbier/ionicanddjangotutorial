@@ -1,0 +1,153 @@
+ion-content {
+  --padding-top: 1%;
+  --padding-start: 10%;
+  --padding-end: 10%;
+  --background: url('https://images.pexels.com/photos/816608/pexels-photo-816608.jpeg?cs=srgb&dl=pexels-alex-andrews-816608.jpg&fm=jpg') 0 0/100% 100% no-repeat;
+}
+
+.errors {
+  font-size: 14px;
+  color: #fff;
+  background: var(--ion-color-danger);
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 15px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+small {
+  display: flex;
+}
+.content {
+    .banner{
+      margin-top: 30px;
+      text-align: center;
+      ion-label{
+        color:white;
+      }
+    }
+.div-item {
+      margin-top: 30px;
+      ion-list {
+        background-color: transparent;
+     
+      ion-icon {
+        font-size: 17px;
+        margin: 14px 0 0 14px;
+      }
+
+      .item-input {
+        margin-left: 43px;
+        margin-right: 43px;
+        --border-radius: 3px;
+        --background: white;
+        margin-bottom: 10px;
+        ion-input {
+          --placeholder-color: black;
+          --color: black;
+        }
+        ion-icon {
+          font-size: 16px;
+          margin-right: 10px;
+        }
+        p {
+          font-size: 16px;
+          font-family: "roboto-regular";
+          margin-top: auto;
+          margin-bottom: auto;
+          color: black;
+        }
+      }
+    }
+    
+    .forget-pass {
+      width: 100%;
+      font-size: 11px;
+      font-family: "Helvetica";
+      --color: white;
+      text-transform: capitalize;
+      margin-top: 10px;
+      margin-bottom: 35px;
+    }
+    
+    .btn-reg {
+      margin-left: 43px;
+      margin-right: 43px;
+      --background: #adadad;
+      --color: white;
+      margin-bottom: 10px;
+      --border-radius: 5px;
+      --box-shadow: none;
+      width: 79%;
+      height: 42px;
+    }
+  }
+  .btn-login {
+    margin-left: 43px;
+    margin-right: 43px;
+    --background: #adadad;
+    --color: white;
+    margin-bottom: 10px;
+    --border-radius: 5px;
+    --box-shadow: none;
+    width: 79%;
+    height: 42px;
+  }
+    .grid-or {
+      ion-col {
+        &:first-child,
+        &:last-child {
+          div {
+            height: 1px;
+            width: 100%;
+            background: white;
+          }
+        }
+        &:first-child {
+          padding-left: 20px;
+        }
+        &:last-child {
+          padding-right: 20px;
+        }
+        p {
+          font-family: "roboto-regular";
+          font-size: 10px;
+          text-align: center;
+          color: white;
+        }
+      }
+    }
+    .grid-icons {
+      ion-col {
+        &:first-child {
+          ion-avatar {
+            margin-left: auto !important;
+          }
+        }
+        &:last-child {
+          ion-avatar {
+            margin-right: auto !important;
+          }
+        }
+        ion-avatar {
+          height: 46px;
+          width: 46px;
+          border: solid lightgray 1px;
+          ion-icon {
+            font-size: 17px;
+            margin: 14px 0 0 14px;
+          }
+        }
+        .avatar-center {
+          margin-left: auto;
+          margin-right: auto;
+          color:white;
+          font-size: 8px;
+        }
+      }
+    }
+
+}
+  

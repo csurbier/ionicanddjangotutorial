@@ -1,0 +1,23 @@
+{# test template #}
+ {% load static %}
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title> Mot de passe modifié</title>
+  <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
+      <link rel="stylesheet" href="{% static 'resetpassword/css/style.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+    <!-- code for displaying success or error message in template -->
+
+     <form class="form-signin" action="" method="post">
+         {% csrf_token %}
+
+      <h2 class="form-signin-heading">Mot de passe modifié, vous pouvez retourner utiliser l'application.</h2>
+      <button class="btn btn-lg btn-primary btn-block"></button>
+    </form>
+    </div>
+</body>
+</html>

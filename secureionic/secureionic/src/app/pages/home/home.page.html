@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      eShop
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div *ngIf="infoAboutMe">
+    Info about me:<br><br>
+    <ion-label>Email: {{infoAboutMe.data.email}}</ion-label><br>
+    <ion-label>ID: {{infoAboutMe.data.id}}</ion-label>
+  </div>
+</ion-content>

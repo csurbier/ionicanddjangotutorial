@@ -1,0 +1,9 @@
+[06/Nov/2020 09:19:01] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[06/Nov/2020 09:19:22] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[06/Nov/2020 09:20:08] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[06/Nov/2020 09:23:49] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[06/Nov/2020 09:24:08] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[06/Nov/2020 09:24:33] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/secureionic/Backend/resetpassword/utils/views.py changed, reloading.
+[06/Nov/2020 09:24:33] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader
+[06/Nov/2020 09:24:56] INFO [django.utils.autoreload:222] /home/christophe/Documents/Programmation/ionicanddjangotutorial/secureionic/Backend/bo/urls.py changed, reloading.
+[06/Nov/2020 09:24:56] INFO [django.utils.autoreload:598] Watching for file changes with StatReloader

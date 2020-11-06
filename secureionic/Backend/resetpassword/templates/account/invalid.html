@@ -1,0 +1,16 @@
+{# test template #}
+ {% load static %}
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>{{cookiecutter.project_name}}, lien expiré</title>
+  <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
+      <link rel="stylesheet" href="{% static 'resetpassword/css/style.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+      <h2 class="form-signin-heading">Ce lien a expiré. Merci de refaire une demande.</h2>
+    </div>
+</body>
+</html>

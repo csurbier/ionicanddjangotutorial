@@ -1,0 +1,12 @@
+{% load i18n %}{% autoescape off %}
+Bonjour,
+<br><br>
+Merci de valider ton compte en cliquant sur le lien suivant:
+<br>
+    {% block reset_link %}
+<a href="https://{{ domain }}/account/validate_account_confirm/{{uid}}/{{token}}">https://{{ domain }}/account/validate_account_confirm/{{uid}}/{{token}}</a>
+    {% endblock %}
+<br><br>
+L'équipe {{cookiecutter.project_name}}
+<br>
+{% endautoescape %}
