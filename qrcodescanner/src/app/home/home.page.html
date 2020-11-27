@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Barcode Scanner tutorial
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img src="productInformation.product.image_url"/>
+    <ion-card-content>
+      <ion-text>Scan a QRCode or Barcode to get the product information</ion-text>
+
+      <ion-button color="success" expand="full" (click)="openBarCodeScanner()">Scan code</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col class="justify-align-center"  *ngIf="barCode">
+        <ion-text>{{barCode}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="justify-align-center"  *ngIf="productInformation">
+        <ion-text>{{productInformation.product.product_name}} </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

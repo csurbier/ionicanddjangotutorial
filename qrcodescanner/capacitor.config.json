@@ -1,0 +1,13 @@
+{
+  "appId": "com.idevotion.qrcodescanner",
+  "appName": "qrcodescanner",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
