@@ -1,0 +1,34 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar mode="ios">
+ <ion-buttons slot="start">
+   <ion-back-button defaultHref="home"></ion-back-button>
+ </ion-buttons>
+ <ion-title>Code</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-flex-align code">
+    <div class="top-content ion-text-center">
+      <h1>Validation code</h1>
+      <p>Please enter the code send to 
+        <br>Phone: {{phoneNumber}}</p>
+      <ion-list mode="ios" formCodeValidate lines="none">
+        <ion-item >
+          <ion-input #codesInpunt0 (keyup)="changeFocus(1)"  [(ngModel)]="code[0]" type="tel" maxlength="1"  ></ion-input>
+        </ion-item>
+        <ion-item >
+          <ion-input #codesInpunt1 (keyup)="changeFocus(2)" [(ngModel)]="code[1]" type="tel" maxlength="1"  ></ion-input>
+        </ion-item>
+        <ion-item >
+          <ion-input #codesInpunt2 (keyup)="changeFocus(3)" [(ngModel)]="code[2]" type="tel" maxlength="1"  ></ion-input>
+        </ion-item>
+        <ion-item >
+          <ion-input #codesInpunt3  (keyup)="changeFocus(4)"   [(ngModel)]="code[3]" type="tel" maxlength="1"  ></ion-input>
+        </ion-item>
+      </ion-list>
+    
+    </div>
+  </div>
+</ion-content>
+ 

@@ -1,0 +1,4 @@
+django
+djangorestframework
+django-cors-middleware
+smsapi-client==2.4.2

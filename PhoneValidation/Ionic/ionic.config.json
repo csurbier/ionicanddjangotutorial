@@ -1,0 +1,7 @@
+{
+  "name": "PhoneValidation",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
