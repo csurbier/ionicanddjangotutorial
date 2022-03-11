@@ -1,4 +1,4 @@
 django>=2.0.11
 psycopg2==2.7 --no-binary psycopg2
-pillow==5.1.0
+pillow==9.0.1
 django-jet
